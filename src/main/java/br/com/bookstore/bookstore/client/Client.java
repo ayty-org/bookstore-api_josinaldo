@@ -1,13 +1,16 @@
-package br.com.bookstore.bookstore.book;
+package br.com.bookstore.bookstore.client;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,25 +18,21 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Builder
-public class Book implements Serializable {
+public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String name;
 
-    private String sinopse;
+    private Integer age;
 
-    private String autor;
+    private Integer phone;
 
-    private String isbn;
+    private String email;
 
-    private LocalDate yearOfPublication;
-
-    private double sellPrice;
-
-    private int quantityAvailable;
+    private String sexo;
 
 }
