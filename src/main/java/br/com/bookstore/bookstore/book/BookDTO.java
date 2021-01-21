@@ -1,49 +1,58 @@
 package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder(builderClassName = "Builder")
-@Table(name = "tb_book")
-public class Book implements Serializable {
+public class BookDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String title;
 
+    @Size(max = 500)
     private String sinopse;
 
+    @NotEmpty
     private String autor;
 
+    @NotEmpty
     private String isbn;
 
+    @NotNull
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate yearOfPublication;
 
+    @NotEmpty
     private double sellPrice;
 
+    @NotEmpty
     private int quantityAvailable;
 
+    @NotNull
     private List<CategoryOfBook> categorys;
 
-    public static Book to(BookDTO entity) {
-        return Book
+    public static BookDTO from(Book entity) {
+        return BookDTO
                 .builder()
                 .id(entity.getId())
                 .title(entity.getTitle())
@@ -56,5 +65,4 @@ public class Book implements Serializable {
                 .categorys(entity.getCategorys())
                 .build();
     }
-
 }
