@@ -18,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Builder(builderClassName = "Builder")
 @Table(name = "tb_category")
 public class CategoryOfBook implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -28,4 +28,13 @@ public class CategoryOfBook implements Serializable {
     private Long id;
 
     private String name;
+
+    public static CategoryOfBook to(CategoryOfBookDTO dto) {
+        return CategoryOfBook
+                .builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .build();
+    }
+
 }

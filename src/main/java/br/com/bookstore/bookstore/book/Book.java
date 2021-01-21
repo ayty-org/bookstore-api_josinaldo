@@ -42,18 +42,18 @@ public class Book implements Serializable {
 
     private List<CategoryOfBook> categorys;
 
-    public static Book to(BookDTO entity) {
+    public static Book to(BookDTO dto) {
         return Book
                 .builder()
-                .id(entity.getId())
-                .title(entity.getTitle())
-                .sinopse(entity.getSinopse())
-                .autor(entity.getAutor())
-                .isbn(entity.getIsbn())
-                .yearOfPublication(entity.getYearOfPublication())
-                .sellPrice(entity.getSellPrice())
-                .quantityAvailable(entity.getQuantityAvailable())
-                .categorys(entity.getCategorys())
+                .id(dto.getId())
+                .title(dto.getTitle())
+                .sinopse(dto.getSinopse())
+                .autor(dto.getAutor())
+                .isbn(dto.getIsbn())
+                .yearOfPublication(dto.getYearOfPublication())
+                .sellPrice(dto.getSellPrice())
+                .quantityAvailable(dto.getQuantityAvailable())
+                .categorys(dto.getCategorys())
                 .build();
     }
 
