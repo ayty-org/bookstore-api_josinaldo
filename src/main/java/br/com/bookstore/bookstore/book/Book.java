@@ -1,7 +1,11 @@
 package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +17,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
+;
 
 @Getter
 @Setter

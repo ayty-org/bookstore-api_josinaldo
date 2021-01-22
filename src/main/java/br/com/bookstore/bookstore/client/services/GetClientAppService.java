@@ -1,5 +1,8 @@
 package br.com.bookstore.bookstore.client.services;
 
-public class GetClientAppService {
+import br.com.bookstore.bookstore.client.Client;
 
+@FunctionalInterface
+public interface GetClientAppService {
+    Client findById(Long id);
 }
