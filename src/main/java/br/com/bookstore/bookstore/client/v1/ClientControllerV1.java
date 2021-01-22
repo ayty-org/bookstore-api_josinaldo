@@ -1,14 +1,21 @@
 package br.com.bookstore.bookstore.client.v1;
 
+import br.com.bookstore.bookstore.client.Client;
 import br.com.bookstore.bookstore.client.ClientDTO;
 import br.com.bookstore.bookstore.client.services.GetAllClientAppService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
+import br.com.bookstore.bookstore.client.services.SaveClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,6 +25,7 @@ public class ClientControllerV1 {
 
     private final GetClientAppService getClientAppService;
     private final GetAllClientAppService getAllClientAppService;
+    private final SaveClientService saveClientService;
 
     @GetMapping(value = "/{id}") //list client by id
     public ClientDTO find(@PathVariable Long id) {
@@ -27,5 +35,11 @@ public class ClientControllerV1 {
     @GetMapping //list all client
     public List<ClientDTO> findAll() {
         return ClientDTO.fromAll(getAllClientAppService.findAll());
+    }
+
+    @ResponseStatus(code = HttpStatus.CREATED)
+    @PostMapping //create client
+    public void insert(@Valid @RequestBody ClientDTO clientDTO) {
+        saveClientService.insert(Client.to(clientDTO));
     }
 }
