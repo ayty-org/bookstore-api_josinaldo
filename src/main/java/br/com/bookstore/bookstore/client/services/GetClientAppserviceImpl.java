@@ -13,6 +13,6 @@ public class GetClientAppserviceImpl implements GetClientAppService {
 
     @Override
     public Client findById(Long id) {
-        return null;
+        return clientRepository.findById(id);
     }
 }
