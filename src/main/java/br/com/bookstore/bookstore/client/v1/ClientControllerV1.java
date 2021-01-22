@@ -19,12 +19,12 @@ public class ClientControllerV1 {
     private final GetClientAppService getClientAppService;
     private final GetAllClientAppService getAllClientAppService;
 
-    @GetMapping(value = "/{id}") //list user by id
+    @GetMapping(value = "/{id}") //list client by id
     public ClientDTO find(@PathVariable Long id) {
         return ClientDTO.from(getClientAppService.findById(id));
     }
 
-    @GetMapping //list all users
+    @GetMapping //list all client
     public List<ClientDTO> findAll() {
         return ClientDTO.fromAll(getAllClientAppService.findAll());
     }

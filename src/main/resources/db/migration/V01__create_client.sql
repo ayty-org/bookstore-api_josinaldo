@@ -16,7 +16,7 @@ INSERT INTO tb_client(
 ) VALUES (
     'Josinaldo',
      20,
-     '3232323232323',
+     '32323233',
      'josinaldo@gmail.com',
      'masculino'
 );
