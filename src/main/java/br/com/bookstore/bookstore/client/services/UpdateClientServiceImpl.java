@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class UpdateClientServiceImpl implements UpdateClientService {
 
     private final ClientRepository clientRepository;
+
     @Override
     public void update(Client client, Long id) {
         Client savedClient = clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
