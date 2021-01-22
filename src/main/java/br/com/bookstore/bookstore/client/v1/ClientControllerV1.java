@@ -2,12 +2,14 @@ package br.com.bookstore.bookstore.client.v1;
 
 import br.com.bookstore.bookstore.client.Client;
 import br.com.bookstore.bookstore.client.ClientDTO;
+import br.com.bookstore.bookstore.client.services.DeleteClientService;
 import br.com.bookstore.bookstore.client.services.GetAllClientAppService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,7 @@ public class ClientControllerV1 {
     private final GetAllClientAppService getAllClientAppService;
     private final SaveClientService saveClientService;
     private final UpdateClientService updateClientService;
+    private final DeleteClientService deleteClientService;
 
     @GetMapping(value = "/{id}") //list client by id
     public ClientDTO find(@PathVariable Long id) {
@@ -50,5 +53,11 @@ public class ClientControllerV1 {
     @PutMapping(value = "/{id}") //replace client by id
     public void update(@Valid @RequestBody ClientDTO clientDTO, @PathVariable Long id ) {
         updateClientService.update(Client.to(clientDTO), id);
+    }
+
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = "/{id}") //delete client
+    public void delete(@PathVariable Long id) {
+        deleteClientService.delete(id);
     }
 }
