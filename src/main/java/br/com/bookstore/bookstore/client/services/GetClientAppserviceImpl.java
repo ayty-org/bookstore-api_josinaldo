@@ -2,6 +2,7 @@ package br.com.bookstore.bookstore.client.services;
 
 import br.com.bookstore.bookstore.client.Client;
 import br.com.bookstore.bookstore.client.ClientRepository;
+import br.com.bookstore.bookstore.exceptions.ClientNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,6 @@ public class GetClientAppserviceImpl implements GetClientAppService {
 
     @Override
     public Client findById(Long id) {
-        return clientRepository.findById(id);
+        return clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
     }
 }
