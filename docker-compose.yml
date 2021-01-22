@@ -3,12 +3,12 @@ services:
   db:
     image: postgres
     container_name: postgres
-    enviroment:
+    environment:
       POSTGRES_PASSWORD: root
-      ports:
-        - "5432:5432"
-      volumes:
-        - bookstore_data/val/lib/postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - bookstore_data:/val/lib/postgres
 
 volumes:
   bookstore_data:
