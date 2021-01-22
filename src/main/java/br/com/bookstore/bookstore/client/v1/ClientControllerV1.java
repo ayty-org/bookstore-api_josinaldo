@@ -5,11 +5,13 @@ import br.com.bookstore.bookstore.client.ClientDTO;
 import br.com.bookstore.bookstore.client.services.GetAllClientAppService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
+import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,6 +28,7 @@ public class ClientControllerV1 {
     private final GetClientAppService getClientAppService;
     private final GetAllClientAppService getAllClientAppService;
     private final SaveClientService saveClientService;
+    private final UpdateClientService updateClientService;
 
     @GetMapping(value = "/{id}") //list client by id
     public ClientDTO find(@PathVariable Long id) {
@@ -41,5 +44,11 @@ public class ClientControllerV1 {
     @PostMapping //create client
     public void insert(@Valid @RequestBody ClientDTO clientDTO) {
         saveClientService.insert(Client.to(clientDTO));
+    }
+
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @PutMapping(value = "/{id}") //replace client by id
+    public void update(@Valid @RequestBody ClientDTO clientDTO, @PathVariable Long id ) {
+        updateClientService.update(Client.to(clientDTO), id);
     }
 }
