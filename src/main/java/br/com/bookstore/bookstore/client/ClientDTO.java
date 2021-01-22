@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -44,6 +46,10 @@ public class ClientDTO implements Serializable {
                 .email(entity.getEmail())
                 .sexo(entity.getSexo())
                 .build();
+    }
+
+    public static List<ClientDTO> fromAll(List<Client> clients) {
+        return clients.stream().map(ClientDTO::from).collect(Collectors.toList());
     }
 
 }
