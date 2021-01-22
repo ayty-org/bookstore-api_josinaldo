@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -40,6 +42,8 @@ public class Book implements Serializable {
 
     private int quantityAvailable;
 
+    @OneToMany
+    @PrimaryKeyJoinColumn
     private List<CategoryOfBook> categorys;
 
     public static Book to(BookDTO dto) {

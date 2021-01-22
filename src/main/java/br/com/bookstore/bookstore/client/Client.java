@@ -18,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Builder(builderClassName = "Builder")
 @Table(name = "tb_client")
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -37,4 +37,14 @@ public class Client implements Serializable {
 
     private String sexo;
 
+    public static Client to(ClientDTO dto) {
+         return Client
+                 .builder()
+                 .name(dto.getName())
+                 .age(dto.getAge())
+                 .phone(dto.getPhone())
+                 .email(dto.getEmail())
+                 .sexo(dto.getSexo())
+                 .build();
+    }
 }
