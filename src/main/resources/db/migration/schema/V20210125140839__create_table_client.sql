@@ -6,17 +6,3 @@ CREATE TABLE tb_client (
     email VARCHAR(50) NOT NULL,
     sexo VARCHAR(50) NOT NULL
 );
-
-INSERT INTO tb_client(
-    name,
-    age,
-    phone,
-    email,
-    sexo
-) VALUES (
-    'Josinaldo',
-     20,
-     '32323233',
-     'josinaldo@gmail.com',
-     'masculino'
-);

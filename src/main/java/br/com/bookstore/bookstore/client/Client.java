@@ -31,7 +31,7 @@ public class Client implements Serializable {
 
     private Integer age;
 
-    private Integer phone;
+    private String phone;
 
     private String email;
 
