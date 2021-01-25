@@ -21,19 +21,19 @@ public class ClientDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
+    @NotNull(message = "The client name cannot be null")
     private String name;
 
-    @NotNull
+    @NotNull(message = "The client age cannot be null")
     private Integer age;
 
-    @NotNull
+    @NotNull(message = "The client phone cannot be null")
     private Integer phone;
 
-    @NotNull
+    @NotNull(message = "The client email cannot be null")
     private String email;
 
-    @NotNull
+    @NotNull(message = "The client sexo cannot be null")
     private String sexo;
 
     public static ClientDTO from(Client entity) {
