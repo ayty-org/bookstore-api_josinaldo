@@ -12,6 +12,6 @@ public class ClientBuilder {
                 .age(22)
                 .email("teste@email")
                 .phone("teste-phone")
-                .sexo("teste-sexo");
+                .sexo("masculino");
     }
 }
