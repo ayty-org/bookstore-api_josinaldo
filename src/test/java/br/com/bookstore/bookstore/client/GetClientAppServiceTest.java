@@ -1,6 +1,7 @@
 package br.com.bookstore.bookstore.client;
 
 import br.com.bookstore.bookstore.client.services.GetClientAppserviceImpl;
+import br.com.bookstore.bookstore.exceptions.ClientNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -15,7 +16,10 @@ import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createCli
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -52,5 +56,15 @@ class GetClientAppServiceTest {
                 () -> assertThat(result.getPhone(), is(client.getPhone())),
                 () -> assertThat(result.getSexo(), is(client.getSexo()))
                 );
+    }
+
+    @Test
+    @DisplayName("findById throws ClientNotFoundException when client is not found")
+    void findByIdClient_ThrowClientNotFoundException_WhenClientNotFound() {
+
+        when(clientRepositoryMock.findById(anyLong())).thenThrow(new ClientNotFoundException());
+
+        assertThrows(ClientNotFoundException.class, () -> getClientAppservice.findById(1l));
+        verify(clientRepositoryMock, times(1)).findById(anyLong());
     }
 }
