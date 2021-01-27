@@ -1,6 +1,7 @@
 package br.com.bookstore.bookstore.client;
 
 import br.com.bookstore.bookstore.client.services.UpdateClientServiceImpl;
+import br.com.bookstore.bookstore.exceptions.ClientNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -16,6 +17,7 @@ import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createCli
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -62,5 +64,12 @@ class UpdateClientServiceTest {
                 () -> assertThat(result.getPhone(), is(putClientRequest.getPhone())),
                 () -> assertThat(result.getSexo(), is(putClientRequest.getSexo()))
         );
+    }
+
+    @Test
+    @DisplayName("update throws ClientNotFoundException when client is not found")
+    void update_ThrowClientNotFoundException_WhenClientNotFound() {
+        when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(ClientNotFoundException.class, ()-> this.updateClientService.update(Client.builder().build(), 1L));
     }
 }
