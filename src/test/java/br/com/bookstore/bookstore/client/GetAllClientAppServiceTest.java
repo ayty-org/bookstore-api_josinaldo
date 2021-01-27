@@ -49,6 +49,7 @@ class GetAllClientAppServiceTest {
         assertAll("Client",
                 () -> assertThat(result.size(), is(1)),
                 () -> assertThat(result.get(0).getName(), is("Teste")),
+                () -> assertThat(result.get(0).getAge(), is(client.getAge())),
                 () -> assertThat(result.get(0).getEmail(), is(client.getEmail())),
                 () -> assertThat(result.get(0).getPhone(), is(client.getPhone())),
                 () -> assertThat(result.get(0).getSexo(), is(client.getSexo()))
