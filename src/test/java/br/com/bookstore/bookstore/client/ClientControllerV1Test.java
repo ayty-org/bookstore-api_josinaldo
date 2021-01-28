@@ -18,7 +18,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createClient;
-import static br.com.bookstore.bookstore.client.builders.ClientBuilderDTO.createClientDTO;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
