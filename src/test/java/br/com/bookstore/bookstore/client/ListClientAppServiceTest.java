@@ -1,7 +1,6 @@
 package br.com.bookstore.bookstore.client;
 
-import br.com.bookstore.bookstore.client.services.GetAllClientAppServiceImpl;
-import org.assertj.core.api.Assertions;
+import br.com.bookstore.bookstore.client.services.ListClientAppServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -23,16 +22,16 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
 @DisplayName("Validates the functionality of the service responsible for list all client")
-class GetAllClientAppServiceTest {
+class ListClientAppServiceTest {
 
     @Mock
     private ClientRepository clientRepository;
 
-    private GetAllClientAppServiceImpl getAllClientAppService;
+    private ListClientAppServiceImpl getAllClientAppService;
 
     @BeforeEach
     void setUp() {
-        this.getAllClientAppService = new GetAllClientAppServiceImpl(clientRepository);
+        this.getAllClientAppService = new ListClientAppServiceImpl(clientRepository);
     }
 
     @Test

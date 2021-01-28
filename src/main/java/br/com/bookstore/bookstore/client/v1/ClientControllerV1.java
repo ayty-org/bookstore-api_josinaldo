@@ -3,7 +3,7 @@ package br.com.bookstore.bookstore.client.v1;
 import br.com.bookstore.bookstore.client.Client;
 import br.com.bookstore.bookstore.client.ClientDTO;
 import br.com.bookstore.bookstore.client.services.DeleteClientService;
-import br.com.bookstore.bookstore.client.services.GetAllClientAppService;
+import br.com.bookstore.bookstore.client.services.ListClientAppService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
@@ -28,7 +28,7 @@ import java.util.List;
 public class ClientControllerV1 {
 
     private final GetClientAppService getClientAppService;
-    private final GetAllClientAppService getAllClientAppService;
+    private final ListClientAppService listClientAppService;
     private final SaveClientService saveClientService;
     private final UpdateClientService updateClientService;
     private final DeleteClientService deleteClientService;
@@ -40,7 +40,7 @@ public class ClientControllerV1 {
 
     @GetMapping //list all client
     public List<ClientDTO> findAll() {
-        return ClientDTO.fromAll(getAllClientAppService.findAll());
+        return ClientDTO.fromAll(listClientAppService.findAll());
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)

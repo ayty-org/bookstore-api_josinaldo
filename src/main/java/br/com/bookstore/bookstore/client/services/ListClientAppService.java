@@ -5,6 +5,6 @@ import br.com.bookstore.bookstore.client.Client;
 import java.util.List;
 
 @FunctionalInterface
-public interface GetAllClientAppService {
+public interface ListClientAppService {
     List<Client> findAll();
 }

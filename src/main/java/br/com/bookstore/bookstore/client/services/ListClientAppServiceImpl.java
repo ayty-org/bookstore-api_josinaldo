@@ -9,7 +9,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class GetAllClientAppServiceImpl implements GetAllClientAppService {
+public class ListClientAppServiceImpl implements ListClientAppService {
 
     private final ClientRepository clientRepository;
 

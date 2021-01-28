@@ -5,9 +5,10 @@ import br.com.bookstore.bookstore.client.ClientDTO;
 public class ClientBuilderDTO {
 
     public static ClientDTO.Builder createClientDTO() {
-        return ClientDTO.builder()
+        return ClientDTO
+                .builder()
                 .id(1L)
-                .name("Shinhigami")
+                .name("Akatsuki")
                 .age(22)
                 .email("teste@email")
                 .phone("teste-phone")
