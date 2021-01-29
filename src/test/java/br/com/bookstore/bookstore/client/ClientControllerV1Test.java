@@ -185,6 +185,17 @@ class ClientControllerV1Test {
         verify(updateClientService).update(any(Client.class), eq(1L));
     }
 
+    @Test
+    @DisplayName("delete remove clients when successful")
+    void delete_RemoveClient_WhenSuccessful() throws Exception{
+        mockMvc.perform(delete(URL_CLIENT + "/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(deleteClientService).delete(anyLong());
+    }
+
     public static String readJson(String file) throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/dataJson/" + file).toAbsolutePath());
         return new String(bytes);
