@@ -7,6 +7,7 @@ import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import br.com.bookstore.bookstore.client.v1.ClientControllerV1;
 import br.com.bookstore.bookstore.exceptions.ClientNotFoundException;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createClient;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -86,5 +88,23 @@ class ClientControllerV1Test {
                 .andExpect(status().isNotFound());
 
         verify(getClientAppService).findById(1L);
+    }
+
+    @Test
+    @DisplayName("listAll returns list of client when successful")
+    void listAll_ReturnsListOfClients_WhenSuccessfull() throws Exception {
+
+        when(listClientAppService.findAll()).thenReturn(Lists.newArrayList(
+                createClient().id(1L).build(),
+                createClient().id(2L).build(),
+                createClient().id(3L).build()
+        ));
+
+        mockMvc.perform(get(URL_CLIENT).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*]", hasSize(3)));
+
+        verify(listClientAppService).findAll();
     }
 }
