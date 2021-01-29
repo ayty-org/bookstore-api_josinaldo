@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -22,17 +23,17 @@ public class ClientDTO implements Serializable {
 
     private Long id;
 
-    @NotNull(message = "The client name cannot be null")
+    @NotEmpty(message = "The client name cannot be empty")
     private String name;
 
     @NotNull(message = "The client age cannot be null")
     @Min(value = 1)
     private Integer age;
 
-    @NotNull(message = "The client phone cannot be null")
+    @NotEmpty(message = "The client phone cannot be empty")
     private String phone;
 
-    @NotNull(message = "The client email cannot be null")
+    @NotEmpty(message = "The client email cannot be empty")
     private String email;
 
     @NotNull(message = "The client sexo cannot be null")

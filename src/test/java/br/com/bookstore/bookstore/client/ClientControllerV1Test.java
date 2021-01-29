@@ -7,6 +7,7 @@ import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import br.com.bookstore.bookstore.client.v1.ClientControllerV1;
 import br.com.bookstore.bookstore.exceptions.ClientNotFoundException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -45,6 +46,9 @@ class ClientControllerV1Test {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @MockBean
     private GetClientAppService getClientAppService;
@@ -124,6 +128,19 @@ class ClientControllerV1Test {
                 .andExpect(status().isCreated());
 
         verify(saveClientService).insert(any(Client.class));
+    }
+
+    @Test
+    @DisplayName("save throws anime when client name is empty")
+    void save_ThrowBadRequest_WhenNameIsEmpty() throws Exception{
+
+        Client client = createClient().id(1L).name("").build();
+
+        mockMvc.perform(post(URL_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(client)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 
     public static String readJson(String file) throws Exception {
