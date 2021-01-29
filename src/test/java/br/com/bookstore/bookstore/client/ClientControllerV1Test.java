@@ -107,4 +107,5 @@ class ClientControllerV1Test {
 
         verify(listClientAppService).findAll();
     }
+
 }
