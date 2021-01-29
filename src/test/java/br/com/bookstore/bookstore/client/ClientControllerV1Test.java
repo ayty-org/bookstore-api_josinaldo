@@ -25,10 +25,12 @@ import java.nio.file.Paths;
 import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createClient;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -109,6 +111,19 @@ class ClientControllerV1Test {
                 .andExpect(jsonPath("$[*]", hasSize(3)));
 
         verify(listClientAppService).findAll();
+    }
+
+    @Test
+    @DisplayName("save returns anime when successful")
+    void save_ReturnsClient_WhenSuccessful() throws Exception{
+
+        mockMvc.perform(post(URL_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(readJson("clientDTO.json")))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        verify(saveClientService).insert(any(Client.class));
     }
 
     public static String readJson(String file) throws Exception {
