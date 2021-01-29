@@ -156,6 +156,19 @@ class ClientControllerV1Test {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    @DisplayName("save throws client when Email is empty")
+    void save_ThrowBadRequest_WhenEmailIsEmpty() throws Exception{
+
+        Client client = createClient().id(1L).email("").build();
+
+        mockMvc.perform(post(URL_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(client)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
     public static String readJson(String file) throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/dataJson/" + file).toAbsolutePath());
         return new String(bytes);
