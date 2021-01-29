@@ -6,6 +6,7 @@ import br.com.bookstore.bookstore.client.services.ListClientAppService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import br.com.bookstore.bookstore.client.v1.ClientControllerV1;
+import br.com.bookstore.bookstore.exceptions.ClientNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -72,5 +73,18 @@ class ClientControllerV1Test {
                 .andExpect(jsonPath("$.sexo", is(client.getSexo())));
 
         verify(getClientAppService).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("findById throws ClientNotFoundException when client is not found")
+    void findByIdClient_ThrowClientNotFoundException_WhenClientNotFound() throws Exception {
+
+        when(getClientAppService.findById(anyLong())).thenThrow(new ClientNotFoundException());
+
+        mockMvc.perform(get(URL_CLIENT + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(getClientAppService).findById(1L);
     }
 }
