@@ -32,7 +32,7 @@ class SaveClientServiceTest {
         this.saveClientService = new SaveClientServiceImpl(clientRepositoryMock);
     }
     @Test
-    @DisplayName("save returns anime when successful")
+    @DisplayName("save returns client when successful")
     void save_ReturnsClient_WhenSuccessful() {
 
         Client client = createClient().build();

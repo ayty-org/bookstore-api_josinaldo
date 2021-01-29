@@ -118,7 +118,7 @@ class ClientControllerV1Test {
     }
 
     @Test
-    @DisplayName("save returns anime when successful")
+    @DisplayName("save returns client when successful")
     void save_ReturnsClient_WhenSuccessful() throws Exception{
 
         mockMvc.perform(post(URL_CLIENT)
@@ -131,10 +131,23 @@ class ClientControllerV1Test {
     }
 
     @Test
-    @DisplayName("save throws anime when client name is empty")
+    @DisplayName("save throws client when name is empty")
     void save_ThrowBadRequest_WhenNameIsEmpty() throws Exception{
 
         Client client = createClient().id(1L).name("").build();
+
+        mockMvc.perform(post(URL_CLIENT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(client)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("save throws client when phone is empty")
+    void save_ThrowBadRequest_WhenPhoneIsEmpty() throws Exception{
+
+        Client client = createClient().id(1L).phone("").build();
 
         mockMvc.perform(post(URL_CLIENT)
                 .contentType(MediaType.APPLICATION_JSON)
