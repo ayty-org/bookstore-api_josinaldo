@@ -1,14 +1,14 @@
 version: '3.1'
-    services:
-      db:
-        image: postgres
-        container_name: postgres
-        environment:
-          POSTGRES_PASSWORD: root
-        ports:
-          - "5432:5432"
-        volumes:
-          - bookstore_data:/val/lib/postgres
-
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
     volumes:
-      bookstore_data:
+      - bookstore_data:/val/lib/postgres
+
+volumes:
+  bookstore_data:
