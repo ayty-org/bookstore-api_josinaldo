@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ListCategoryOfBookServiceImpl implements ListCategoryOfBookService{
 
-    private CategoryOfBookRepository categoryOfBookRepository;
+    private final CategoryOfBookRepository categoryOfBookRepository;
 
     @Override
     public List<CategoryOfBook> findAll() {
