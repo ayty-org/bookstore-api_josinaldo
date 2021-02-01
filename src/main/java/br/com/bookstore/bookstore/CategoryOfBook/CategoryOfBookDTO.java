@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -29,6 +31,10 @@ public class CategoryOfBookDTO implements Serializable {
                 .id(entity.getId())
                 .name(entity.getName())
                 .build();
+    }
+
+    public static List<CategoryOfBookDTO> fromAll(List<CategoryOfBook> categorys) {
+        return categorys.stream().map(CategoryOfBookDTO::from).collect(Collectors.toList());
     }
 
     public static Page<CategoryOfBookDTO> fromPage(Page<CategoryOfBook> pages){
