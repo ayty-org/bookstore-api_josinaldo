@@ -9,6 +9,8 @@ import br.com.bookstore.bookstore.CategoryOfBook.service.ListPageCategoryOfBooks
 import br.com.bookstore.bookstore.CategoryOfBook.service.SaveCategoryOfBookService;
 import br.com.bookstore.bookstore.CategoryOfBook.service.UpdateCategoryOfBookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,5 +39,8 @@ public class CategoryOfBookControllerV1 {
         return CategoryOfBookDTO.fromAll(listCategoryOfBookService.findAll());
     }
 
-
+    @GetMapping(path = {"/page"})
+    public Page<CategoryOfBookDTO> findPage(Pageable pageable) {
+        return CategoryOfBookDTO.fromPage(listPageCategoryOfBooksService.findPage(pageable));
+    }
 }
