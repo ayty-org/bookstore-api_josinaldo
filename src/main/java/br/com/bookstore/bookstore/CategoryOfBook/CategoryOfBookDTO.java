@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -28,5 +29,9 @@ public class CategoryOfBookDTO implements Serializable {
                 .id(entity.getId())
                 .name(entity.getName())
                 .build();
+    }
+
+    public static Page<CategoryOfBookDTO> fromPage(Page<CategoryOfBook> pages){
+        return pages.map(CategoryOfBookDTO::from);
     }
 }
