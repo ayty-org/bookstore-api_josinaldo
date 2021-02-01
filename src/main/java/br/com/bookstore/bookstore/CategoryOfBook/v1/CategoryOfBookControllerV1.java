@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/v1/api/book/category")
@@ -30,4 +32,10 @@ public class CategoryOfBookControllerV1 {
     public CategoryOfBookDTO find(@PathVariable Long id){
         return CategoryOfBookDTO.from(getCategoryOfBookService.findById(id));
     }
+
+    public List<CategoryOfBookDTO> findAll(){
+        return CategoryOfBookDTO.fromAll(listCategoryOfBookService.findAll());
+    }
+
+
 }
