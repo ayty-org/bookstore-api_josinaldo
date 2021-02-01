@@ -11,11 +11,16 @@ import br.com.bookstore.bookstore.CategoryOfBook.service.UpdateCategoryOfBookSer
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,17 +35,25 @@ public class CategoryOfBookControllerV1 {
     private final DeleteCategoryOfBookService deleteCategoryOfBookService;
     private final SaveCategoryOfBookService saveCategoryOfBookService;
 
-    @GetMapping(value = "/{id}") //list categoryofbook by id
+    @GetMapping(value = "/{id}") //list category of book by id
     public CategoryOfBookDTO find(@PathVariable Long id){
         return CategoryOfBookDTO.from(getCategoryOfBookService.findById(id));
     }
 
-    public List<CategoryOfBookDTO> findAll(){
+    public List<CategoryOfBookDTO> findAll(){ //list all category of book
         return CategoryOfBookDTO.fromAll(listCategoryOfBookService.findAll());
     }
 
-    @GetMapping(path = {"/page"})
+    @GetMapping(path = {"/page"}) //list all category of book inside object page
     public Page<CategoryOfBookDTO> findPage(Pageable pageable) {
         return CategoryOfBookDTO.fromPage(listPageCategoryOfBooksService.findPage(pageable));
     }
+
+    @ResponseStatus(code = HttpStatus.CREATED)
+    @PostMapping //create category of book
+    public void insert(@Valid @RequestBody CategoryOfBookDTO categoryOfBookDTO){
+        saveCategoryOfBookService.insert(CategoryOfBook.to(categoryOfBookDTO));
+    }
+
+
 }
