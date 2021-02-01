@@ -11,6 +11,6 @@ public class ListPageCategoryOfBooksServiceImpl implements ListPageCategoryOfBoo
 
     @Override
     public Page<CategoryOfBook> findPage(Pageable pageable) {
-        return null;
+        return categoryOfBookRepository.findAll(pageable);
     }
 }
