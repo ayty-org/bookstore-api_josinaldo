@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,11 @@ public class CategoryOfBookControllerV1 {
     @PutMapping(value = "/{id}") //replace category of book by id
     public void update(@Valid @RequestBody CategoryOfBookDTO categoryOfBookDTO, @PathVariable Long id) {
         updateCategoryOfBookService.update(CategoryOfBook.to(categoryOfBookDTO), id);
+    }
+
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = "/{id}") //delete category of book
+    public void delete(@PathVariable Long id) {
+        deleteCategoryOfBookService.delete(id);
     }
 }
