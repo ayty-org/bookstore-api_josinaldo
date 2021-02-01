@@ -5,9 +5,12 @@ import br.com.bookstore.bookstore.client.ClientDTO;
 import br.com.bookstore.bookstore.client.services.DeleteClientService;
 import br.com.bookstore.bookstore.client.services.ListClientAppService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
+import br.com.bookstore.bookstore.client.services.ListPageClientService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,7 @@ public class ClientControllerV1 {
 
     private final GetClientAppService getClientAppService;
     private final ListClientAppService listClientAppService;
+    private final ListPageClientService listPageClientService;
     private final SaveClientService saveClientService;
     private final UpdateClientService updateClientService;
     private final DeleteClientService deleteClientService;
@@ -42,6 +46,9 @@ public class ClientControllerV1 {
     public List<ClientDTO> findAll() {
         return ClientDTO.fromAll(listClientAppService.findAll());
     }
+
+    @GetMapping(path = {"/page"})
+    public Page<ClientDTO> findPage(Pageable pageable){ return ClientDTO.fromPage(listPageClientService.findPage(pageable));}
 
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping //create client

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -53,6 +54,10 @@ public class ClientDTO implements Serializable {
 
     public static List<ClientDTO> fromAll(List<Client> clients) {
         return clients.stream().map(ClientDTO::from).collect(Collectors.toList());
+    }
+
+    public static Page<ClientDTO> fromPage(Page<Client> pages){
+        return pages.map(ClientDTO::from);
     }
 
 }

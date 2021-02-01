@@ -3,6 +3,7 @@ package br.com.bookstore.bookstore.client;
 import br.com.bookstore.bookstore.client.services.DeleteClientService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
 import br.com.bookstore.bookstore.client.services.ListClientAppService;
+import br.com.bookstore.bookstore.client.services.ListPageClientService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import br.com.bookstore.bookstore.client.v1.ClientControllerV1;
@@ -16,12 +17,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 
 import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createClient;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -58,6 +64,9 @@ class ClientControllerV1Test {
 
     @MockBean
     private ListClientAppService listClientAppService;
+
+    @MockBean
+    private ListPageClientService listPageClientService;
 
     @MockBean
     private UpdateClientService updateClientService;
@@ -118,6 +127,31 @@ class ClientControllerV1Test {
                 .andExpect(jsonPath("$[*]", hasSize(3)));
 
         verify(listClientAppService).findAll();
+    }
+
+    @Test
+    @DisplayName("listAll returns list of client inside page object when successful")
+    void listAll_ReturnsListOfClientInsidePageObject_WhenSuccessful() throws Exception{
+
+        Page<Client> clientPage = new PageImpl<>(Collections.singletonList(createClient().build()));
+
+        Pageable pageable = PageRequest.of(0,2);
+
+        when(listPageClientService.findPage(pageable)).thenReturn(clientPage);
+
+        Client clientBuild = createClient().build();
+
+        mockMvc.perform(get(URL_CLIENT + "/page/?page=0&size=2").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id", is(1)))
+                .andExpect(jsonPath("$.content[0].name", is(clientBuild.getName())))
+                .andExpect(jsonPath("$.content[0].age", is(clientBuild.getAge())))
+                .andExpect(jsonPath("$.content[0].email", is(clientBuild.getEmail())))
+                .andExpect(jsonPath("$.content[0].phone", is(clientBuild.getPhone())))
+                .andExpect(jsonPath("$.content[0].sexo", is(clientBuild.getSexo())));
+
+        verify(listPageClientService).findPage(pageable);
     }
 
     @Test
