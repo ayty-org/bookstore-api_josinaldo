@@ -42,6 +42,7 @@ public class CategoryOfBookControllerV1 {
         return CategoryOfBookDTO.from(getCategoryOfBookService.findById(id));
     }
 
+    @GetMapping
     public List<CategoryOfBookDTO> findAll(){ //list all category of book
         return CategoryOfBookDTO.fromAll(listCategoryOfBookService.findAll());
     }
