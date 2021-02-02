@@ -117,14 +117,28 @@ class ClientControllerV1Test {
 
         when(listClientAppService.findAll()).thenReturn(Lists.newArrayList(
                 createClient().id(1L).build(),
-                createClient().id(2L).build(),
-                createClient().id(3L).build()
+                createClient().id(2L).build()
         ));
+
+        Client client = createClient().build();
 
         mockMvc.perform(get(URL_CLIENT).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*]", hasSize(3)));
+                .andExpect(jsonPath("$[*]", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].name", is(client.getName())))
+                .andExpect(jsonPath("$[0].age", is(client.getAge())))
+                .andExpect(jsonPath("$[0].email", is(client.getEmail())))
+                .andExpect(jsonPath("$[0].phone", is(client.getPhone())))
+                .andExpect(jsonPath("$[0].sexo", is(client.getSexo())))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].name", is(client.getName())))
+                .andExpect(jsonPath("$[1].age", is(client.getAge())))
+                .andExpect(jsonPath("$[1].email", is(client.getEmail())))
+                .andExpect(jsonPath("$[1].phone", is(client.getPhone())))
+                .andExpect(jsonPath("$[1].sexo", is(client.getSexo())));
+
 
         verify(listClientAppService).findAll();
     }
