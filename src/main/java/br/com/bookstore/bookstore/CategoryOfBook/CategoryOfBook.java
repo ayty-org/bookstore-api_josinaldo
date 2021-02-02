@@ -19,7 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Builder(builderClassName = "Builder")
-@Table(name = "tb_category")
+@Table(name = "tb_categoryofbook")
 public class CategoryOfBook implements Serializable {
     private static final long serialVersionUID = 1L;
 

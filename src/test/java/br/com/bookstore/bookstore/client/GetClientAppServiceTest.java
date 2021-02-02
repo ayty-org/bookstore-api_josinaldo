@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for searching for a client by id ")
+@DisplayName("Validates the functionality of the services responsible for searching for a client by id ")
 class GetClientAppServiceTest {
 
     @Mock
@@ -40,7 +40,7 @@ class GetClientAppServiceTest {
 
     @Test
     @DisplayName("findById returns client when succesful")
-    void findById_ReturnClient_WhenSuccessful(){
+    void findByIdReturnClientWhenSuccessful(){
 
         Client client = createClient().build(); //create a build to client
         Optional<Client> clientSavedOptional = Optional.of(client);
@@ -60,7 +60,7 @@ class GetClientAppServiceTest {
 
     @Test
     @DisplayName("findById throws ClientNotFoundException when client is not found")
-    void findByIdClient_ThrowClientNotFoundException_WhenClientNotFound() {
+    void findByIdClientThrowClientNotFoundExceptionWhenClientNotFound() {
 
         when(clientRepositoryMock.findById(anyLong())).thenThrow(new ClientNotFoundException());
 

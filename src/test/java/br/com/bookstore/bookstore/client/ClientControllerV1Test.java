@@ -79,7 +79,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("findById returns client when succesful")
-    void findById_ReturnClient_WhenSuccessful() throws Exception{
+    void findByIdReturnClientWhenSuccessful() throws Exception{
 
         when(getClientAppService.findById(anyLong())).thenReturn(createClient().build());
 
@@ -100,7 +100,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("findById throws ClientNotFoundException when client is not found")
-    void findByIdClient_ThrowClientNotFoundException_WhenClientNotFound() throws Exception {
+    void findByIdClientThrowClientNotFoundExceptionWhenClientNotFound() throws Exception {
 
         when(getClientAppService.findById(anyLong())).thenThrow(new ClientNotFoundException());
 
@@ -113,25 +113,39 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("listAll returns list of client when successful")
-    void listAll_ReturnsListOfClients_WhenSuccessfull() throws Exception {
+    void listAllReturnsListOfClientsWhenSuccessfull() throws Exception {
 
         when(listClientAppService.findAll()).thenReturn(Lists.newArrayList(
                 createClient().id(1L).build(),
-                createClient().id(2L).build(),
-                createClient().id(3L).build()
+                createClient().id(2L).build()
         ));
+
+        Client client = createClient().build();
 
         mockMvc.perform(get(URL_CLIENT).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*]", hasSize(3)));
+                .andExpect(jsonPath("$[*]", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].name", is(client.getName())))
+                .andExpect(jsonPath("$[0].age", is(client.getAge())))
+                .andExpect(jsonPath("$[0].email", is(client.getEmail())))
+                .andExpect(jsonPath("$[0].phone", is(client.getPhone())))
+                .andExpect(jsonPath("$[0].sexo", is(client.getSexo())))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].name", is(client.getName())))
+                .andExpect(jsonPath("$[1].age", is(client.getAge())))
+                .andExpect(jsonPath("$[1].email", is(client.getEmail())))
+                .andExpect(jsonPath("$[1].phone", is(client.getPhone())))
+                .andExpect(jsonPath("$[1].sexo", is(client.getSexo())));
+
 
         verify(listClientAppService).findAll();
     }
 
     @Test
     @DisplayName("listAll returns list of client inside page object when successful")
-    void listAll_ReturnsListOfClientInsidePageObject_WhenSuccessful() throws Exception{
+    void listAllReturnsListOfClientInsidePageObject_WhenSuccessful() throws Exception{
 
         Page<Client> clientPage = new PageImpl<>(Collections.singletonList(createClient().build()));
 
@@ -156,7 +170,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("save returns client when successful")
-    void save_ReturnsClient_WhenSuccessful() throws Exception{
+    void saveReturnsClientWhenSuccessful() throws Exception{
 
         mockMvc.perform(post(URL_CLIENT)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -169,7 +183,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("save throws client when name is empty")
-    void save_ThrowBadRequest_WhenNameIsEmpty() throws Exception{
+    void saveThrowBadRequestWhenNameIsEmpty() throws Exception{
 
         Client client = createClient().id(1L).name("").build();
 
@@ -182,7 +196,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("save throws client when phone is empty")
-    void save_ThrowBadRequest_WhenPhoneIsEmpty() throws Exception{
+    void saveThrowBadRequestWhenPhoneIsEmpty() throws Exception{
 
         Client client = createClient().id(1L).phone("").build();
 
@@ -195,7 +209,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("save throws client when Email is empty")
-    void save_ThrowBadRequest_WhenEmailIsEmpty() throws Exception{
+    void saveThrowBadRequestWhenEmailIsEmpty() throws Exception{
 
         Client client = createClient().id(1L).email("").build();
 
@@ -208,7 +222,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("update client when successful")
-    void update_ReturnsClientUpdate_WhenSuccessful() throws Exception{
+    void updateReturnsClientUpdateWhenSuccessful() throws Exception{
 
         mockMvc.perform(put(URL_CLIENT + "/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -221,7 +235,7 @@ class ClientControllerV1Test {
 
     @Test
     @DisplayName("delete remove clients when successful")
-    void delete_RemoveClient_WhenSuccessful() throws Exception{
+    void deleteRemoveClientWhenSuccessful() throws Exception{
         mockMvc.perform(delete(URL_CLIENT + "/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

@@ -11,8 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.util.Collections;
 
 import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createClient;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for pagination of all client")
+@DisplayName("Validates the functionality of the services responsible for pagination of all client")
 class ListPageClientServiceTest {
 
     @Mock
@@ -38,9 +38,9 @@ class ListPageClientServiceTest {
 
     @Test
     @DisplayName("listAll returns list of client inside page object when successful")
-    void listAll_ReturnsListOfClientInsidePageObject_WhenSuccessful() {
+    void listAllReturnsListOfClientInsidePageObjectWhenSuccessful() {
 
-        PageRequest pageable = PageRequest.of(0, 2);
+        Pageable pageable = PageRequest.of(0, 2);
 
         when(listPageClientService.findPage(pageable))
                 .thenReturn(new PageImpl<>(Collections.nCopies(2, createClient().build())));

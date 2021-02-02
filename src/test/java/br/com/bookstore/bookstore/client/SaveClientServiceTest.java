@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for save client")
+@DisplayName("Validates the functionality of the services responsible for save client")
 class SaveClientServiceTest {
 
     @Mock
@@ -33,7 +33,7 @@ class SaveClientServiceTest {
     }
     @Test
     @DisplayName("save returns client when successful")
-    void save_ReturnsClient_WhenSuccessful() {
+    void saveReturnsClientWhenSuccessful() {
 
         Client client = createClient().build();
 

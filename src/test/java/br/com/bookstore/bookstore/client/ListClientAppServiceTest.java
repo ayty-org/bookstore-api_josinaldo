@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for list all client")
+@DisplayName("Validates the functionality of the services responsible for list all client")
 class ListClientAppServiceTest {
 
     @Mock
@@ -36,7 +36,7 @@ class ListClientAppServiceTest {
 
     @Test
     @DisplayName("listAll returns list of client when successful")
-    void listAll_ReturnsListOfClients_WhenSuccessfull() {
+    void listAllReturnsListOfClientsWhenSuccessfull() {
 
         Client client = createClient().build();
         when(clientRepository.findAll()).thenReturn(
