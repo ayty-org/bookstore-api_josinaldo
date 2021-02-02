@@ -27,13 +27,13 @@ import static org.mockito.Mockito.when;
 class ListPageCategoryOfBooksServiceTest {
 
     @Mock
-    private CategoryOfBookRepository categoryOfBookRepository;
+    private CategoryOfBookRepository categoryOfBookRepositoryMock;
 
     private ListPageCategoryOfBooksServiceImpl listPageCategoryOfBooksService;
 
     @BeforeEach
     void setUp() {
-        this.listPageCategoryOfBooksService = new ListPageCategoryOfBooksServiceImpl(categoryOfBookRepository);
+        this.listPageCategoryOfBooksService = new ListPageCategoryOfBooksServiceImpl(categoryOfBookRepositoryMock);
     }
 
     @Test

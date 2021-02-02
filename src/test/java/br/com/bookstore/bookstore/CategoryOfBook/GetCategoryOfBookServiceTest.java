@@ -26,13 +26,13 @@ import static org.mockito.Mockito.when;
 class GetCategoryOfBookServiceTest {
 
     @Mock
-    private CategoryOfBookRepository categoryOfBookRepository;
+    private CategoryOfBookRepository categoryOfBookRepositoryMock;
 
     private GetCategoryOfBookServiceImpl getCategoryOfBookService;
 
     @BeforeEach
     void setUp() {
-        this.getCategoryOfBookService = new GetCategoryOfBookServiceImpl(categoryOfBookRepository);
+        this.getCategoryOfBookService = new GetCategoryOfBookServiceImpl(categoryOfBookRepositoryMock);
     }
 
     @Test
@@ -41,7 +41,7 @@ class GetCategoryOfBookServiceTest {
         CategoryOfBook categoryOfBook = createCategoryOfBook().build(); //create a build to category of book
 
         Optional<CategoryOfBook> categoryOfBookSavedOptional = Optional.of(categoryOfBook);
-        when(categoryOfBookRepository.findById(anyLong())).thenReturn(categoryOfBookSavedOptional);
+        when(categoryOfBookRepositoryMock.findById(anyLong())).thenReturn(categoryOfBookSavedOptional);
 
         CategoryOfBook result = this.getCategoryOfBookService.findById(1L); //result of requisition
 
@@ -54,7 +54,7 @@ class GetCategoryOfBookServiceTest {
     @Test
     @DisplayName("findById throws CategoryOfBookNotFoundException when category of book is not found")
     void findByIdThrowCategoryOfBookNotFoundExceptionWhenCategoryOfBookNotFound() {
-        when(categoryOfBookRepository.findById(anyLong())).thenThrow(new CategoryOfBookNotFoundException());
+        when(categoryOfBookRepositoryMock.findById(anyLong())).thenThrow(new CategoryOfBookNotFoundException());
 
         assertThrows(CategoryOfBookNotFoundException.class, () -> getCategoryOfBookService.findById(1l));
     }

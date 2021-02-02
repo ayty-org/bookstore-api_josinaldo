@@ -39,7 +39,6 @@ class DeleteClientServiceTest {
     @DisplayName("delete remove clients when successful")
     void deleteRemoveClientWhenSuccessful() {
         when(clientRepositoryMock.existsById(anyLong())).thenReturn(true);
-        when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.of(createClient().build()));
         deleteClientService.delete(1L);
         verify(clientRepositoryMock).existsById(anyLong());
     }

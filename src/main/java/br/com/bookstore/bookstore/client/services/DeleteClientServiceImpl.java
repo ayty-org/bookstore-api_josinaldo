@@ -17,7 +17,7 @@ public class DeleteClientServiceImpl implements DeleteClientService{
         if(!clientRepository.existsById(id)) {
             throw  new ClientNotFoundException();
         }
-        Client client = clientRepository.findById(id).orElseThrow(ClientNotFoundException::new);
+
 
         clientRepository.deleteById(id);
     }
