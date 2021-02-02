@@ -9,6 +9,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
 @DisplayName("Validates the functionality of the services responsible for searching for a category of book by id ")
@@ -27,6 +36,16 @@ class GetCategoryOfBookServiceTest {
     @Test
     @DisplayName("findById returns client when succesful")
     void findByIdReturnClientWhenSuccessful(){
+        CategoryOfBook categoryOfBook = createCategoryOfBook().build(); //create a build to category of book
 
+        Optional<CategoryOfBook> categoryOfBookSavedOptional = Optional.of(categoryOfBook);
+        when(categoryOfBookRepository.findById(anyLong())).thenReturn(categoryOfBookSavedOptional);
+
+        CategoryOfBook result = this.getCategoryOfBookService.findById(1L); //result of requisition
+
+        //verification
+        assertAll("CategoryOfBook",
+                () -> assertThat(result.getName(), is(categoryOfBook.getName()))
+        );
     }
 }
