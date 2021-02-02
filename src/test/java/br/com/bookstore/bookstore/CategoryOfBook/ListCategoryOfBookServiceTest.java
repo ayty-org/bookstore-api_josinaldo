@@ -25,20 +25,20 @@ import static org.mockito.Mockito.when;
 class ListCategoryOfBookServiceTest {
 
     @Mock
-    private CategoryOfBookRepository categoryOfBookRepository;
+    private CategoryOfBookRepository categoryOfBookRepositoryMock;
 
     private ListCategoryOfBookServiceImpl listCategoryOfBookService;
 
     @BeforeEach
     void setUp() {
-        this.listCategoryOfBookService = new ListCategoryOfBookServiceImpl(categoryOfBookRepository);
+        this.listCategoryOfBookService = new ListCategoryOfBookServiceImpl(categoryOfBookRepositoryMock);
     }
 
     @Test
     @DisplayName("listAll returns to list category of books when successful")
     void listAllReturnsListOfCategoryOfBooksWhenSuccessfull() {
 
-        when(categoryOfBookRepository.findAll()).thenReturn(
+        when(categoryOfBookRepositoryMock.findAll()).thenReturn(
                 Stream.of(createCategoryOfBook().name("Ação").build()).collect(Collectors.toList())
         );
 
