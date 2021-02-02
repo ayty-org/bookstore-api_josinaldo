@@ -1,6 +1,7 @@
 package br.com.bookstore.bookstore.CategoryOfBook;
 
 import br.com.bookstore.bookstore.CategoryOfBook.services.GetCategoryOfBookServiceImpl;
+import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -15,6 +16,7 @@ import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookB
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -34,8 +36,8 @@ class GetCategoryOfBookServiceTest {
     }
 
     @Test
-    @DisplayName("findById returns client when succesful")
-    void findByIdReturnClientWhenSuccessful(){
+    @DisplayName("findById returns category of book when succesful")
+    void findByIdReturnCategoryOfBookWhenSuccessful(){
         CategoryOfBook categoryOfBook = createCategoryOfBook().build(); //create a build to category of book
 
         Optional<CategoryOfBook> categoryOfBookSavedOptional = Optional.of(categoryOfBook);
@@ -47,5 +49,13 @@ class GetCategoryOfBookServiceTest {
         assertAll("CategoryOfBook",
                 () -> assertThat(result.getName(), is(categoryOfBook.getName()))
         );
+    }
+
+    @Test
+    @DisplayName("findById throws CategoryOfBookNotFoundException when category of book is not found")
+    void findByIdThrowCategoryOfBookNotFoundExceptionWhenCategoryOfBookNotFound() {
+        when(categoryOfBookRepository.findById(anyLong())).thenThrow(new CategoryOfBookNotFoundException());
+
+        assertThrows(CategoryOfBookNotFoundException.class, () -> getCategoryOfBookService.findById(1l));
     }
 }
