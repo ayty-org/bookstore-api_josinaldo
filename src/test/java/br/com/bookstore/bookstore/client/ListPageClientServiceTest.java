@@ -38,7 +38,7 @@ class ListPageClientServiceTest {
 
     @Test
     @DisplayName("listAll returns list of client inside page object when successful")
-    void listAll_ReturnsListOfClientInsidePageObject_WhenSuccessful() {
+    void listAllReturnsListOfClientInsidePageObjectWhenSuccessful() {
 
         PageRequest pageable = PageRequest.of(0, 2);
 

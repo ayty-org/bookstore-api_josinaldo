@@ -39,7 +39,7 @@ class UpdateClientServiceTest {
 
     @Test
     @DisplayName("update client when successful")
-    void update_ReturnsClientUpdate_WhenSuccessful(){
+    void updateReturnsClientUpdateWhenSuccessful(){
 
         Client putClientRequest = createClient()
                 .name("Name update")
@@ -68,7 +68,7 @@ class UpdateClientServiceTest {
 
     @Test
     @DisplayName("update throws ClientNotFoundException when client is not found")
-    void update_ThrowClientNotFoundException_WhenClientNotFound() {
+    void updateThrowClientNotFoundExceptionWhenClientNotFound() {
         when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(ClientNotFoundException.class, ()-> this.updateClientService.update(Client.builder().build(), 1L));
     }

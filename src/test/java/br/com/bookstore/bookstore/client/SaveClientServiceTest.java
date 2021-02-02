@@ -33,7 +33,7 @@ class SaveClientServiceTest {
     }
     @Test
     @DisplayName("save returns client when successful")
-    void save_ReturnsClient_WhenSuccessful() {
+    void saveReturnsClientWhenSuccessful() {
 
         Client client = createClient().build();
 
