@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for save client")
+@DisplayName("Validates the functionality of the services responsible for save client")
 class SaveClientServiceTest {
 
     @Mock

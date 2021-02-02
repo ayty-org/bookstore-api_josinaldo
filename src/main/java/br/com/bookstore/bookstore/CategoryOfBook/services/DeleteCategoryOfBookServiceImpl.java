@@ -1,7 +1,5 @@
-package br.com.bookstore.bookstore.CategoryOfBook.service;
+package br.com.bookstore.bookstore.CategoryOfBook.services;
 
-
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
 import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBookRepository;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class GetCategoryOfBookServiceImpl implements GetCategoryOfBookService{
+public class DeleteCategoryOfBookServiceImpl implements DeleteCategoryOfBookService{
 
     private final CategoryOfBookRepository categoryOfBookRepository;
-
     @Override
-    public CategoryOfBook findById(Long id) {
-        return categoryOfBookRepository.findById(id).orElseThrow(CategoryOfBookNotFoundException::new);
+    public void delete(Long id) {
+        if(!categoryOfBookRepository.existsById(id)){
+            throw new CategoryOfBookNotFoundException();
+        }
+
+        categoryOfBookRepository.deleteById(id);
     }
 }

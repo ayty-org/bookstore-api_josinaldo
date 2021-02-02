@@ -2,12 +2,12 @@ package br.com.bookstore.bookstore.CategoryOfBook.v1;
 
 import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
 import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBookDTO;
-import br.com.bookstore.bookstore.CategoryOfBook.service.DeleteCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.service.GetCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.service.ListCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.service.ListPageCategoryOfBooksService;
-import br.com.bookstore.bookstore.CategoryOfBook.service.SaveCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.service.UpdateCategoryOfBookService;
+import br.com.bookstore.bookstore.CategoryOfBook.services.DeleteCategoryOfBookService;
+import br.com.bookstore.bookstore.CategoryOfBook.services.GetCategoryOfBookService;
+import br.com.bookstore.bookstore.CategoryOfBook.services.ListCategoryOfBookService;
+import br.com.bookstore.bookstore.CategoryOfBook.services.ListPageCategoryOfBooksService;
+import br.com.bookstore.bookstore.CategoryOfBook.services.SaveCategoryOfBookService;
+import br.com.bookstore.bookstore.CategoryOfBook.services.UpdateCategoryOfBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

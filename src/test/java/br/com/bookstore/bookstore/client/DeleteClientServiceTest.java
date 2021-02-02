@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for delete client")
+@DisplayName("Validates the functionality of the services responsible for delete client")
 class DeleteClientServiceTest {
 
     @Mock

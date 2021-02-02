@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the service responsible for update client")
+@DisplayName("Validates the functionality of the services responsible for update client")
 class UpdateClientServiceTest {
 
     @Mock
