@@ -50,7 +50,7 @@ public class Book implements Serializable {
 
     @OneToMany
     @PrimaryKeyJoinColumn
-    private List<CategoryOfBook> categorys;
+    private CategoryOfBook categorys;
 
     public static Book to(BookDTO dto) {
         return Book
