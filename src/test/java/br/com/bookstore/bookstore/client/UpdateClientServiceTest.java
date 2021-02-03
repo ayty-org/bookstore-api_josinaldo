@@ -58,11 +58,11 @@ class UpdateClientServiceTest {
         Client result = clientArgumentCaptor.getValue();
 
         assertAll("Client",
-                () -> assertThat(result.getName(), is(putClientRequest.getName())),
-                () -> assertThat(result.getAge(), is(putClientRequest.getAge())),
-                () -> assertThat(result.getEmail(), is(putClientRequest.getEmail())),
-                () -> assertThat(result.getPhone(), is(putClientRequest.getPhone())),
-                () -> assertThat(result.getSexo(), is(putClientRequest.getSexo()))
+                ()-> assertThat(result.getName(), is("Name update")),
+                () -> assertThat(result.getAge(), is(30)),
+                () -> assertThat(result.getEmail(), is("teste@email")),
+                () -> assertThat(result.getPhone(), is("teste-phone")),
+                () -> assertThat(result.getSexo(), is("masculino"))
         );
     }
 

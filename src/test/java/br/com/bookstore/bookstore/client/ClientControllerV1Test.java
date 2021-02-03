@@ -83,17 +83,15 @@ class ClientControllerV1Test {
 
         when(getClientAppService.findById(anyLong())).thenReturn(createClient().build());
 
-        Client client = createClient().build();
-
         mockMvc.perform(get(URL_CLIENT + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is(client.getName())))
-                .andExpect(jsonPath("$.age", is(client.getAge())))
-                .andExpect(jsonPath("$.email", is(client.getEmail())))
-                .andExpect(jsonPath("$.phone", is(client.getPhone())))
-                .andExpect(jsonPath("$.sexo", is(client.getSexo())));
+                .andExpect(jsonPath("$.name", is("Aktsuki")))
+                .andExpect(jsonPath("$.age", is(22)))
+                .andExpect(jsonPath("$.email", is("teste@email")))
+                .andExpect(jsonPath("$.phone", is("teste-phone")))
+                .andExpect(jsonPath("$.sexo", is("masculino")));
 
         verify(getClientAppService).findById(anyLong());
     }
@@ -120,24 +118,22 @@ class ClientControllerV1Test {
                 createClient().id(2L).build()
         ));
 
-        Client client = createClient().build();
-
         mockMvc.perform(get(URL_CLIENT).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*]", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].name", is(client.getName())))
-                .andExpect(jsonPath("$[0].age", is(client.getAge())))
-                .andExpect(jsonPath("$[0].email", is(client.getEmail())))
-                .andExpect(jsonPath("$[0].phone", is(client.getPhone())))
-                .andExpect(jsonPath("$[0].sexo", is(client.getSexo())))
+                .andExpect(jsonPath("$[0].name", is("Aktsuki")))
+                .andExpect(jsonPath("$[0].age", is(22)))
+                .andExpect(jsonPath("$[0].email",is("teste@email")))
+                .andExpect(jsonPath("$[0].phone",  is("teste-phone")))
+                .andExpect(jsonPath("$[0].sexo", is("masculino")))
                 .andExpect(jsonPath("$[1].id", is(2)))
-                .andExpect(jsonPath("$[1].name", is(client.getName())))
-                .andExpect(jsonPath("$[1].age", is(client.getAge())))
-                .andExpect(jsonPath("$[1].email", is(client.getEmail())))
-                .andExpect(jsonPath("$[1].phone", is(client.getPhone())))
-                .andExpect(jsonPath("$[1].sexo", is(client.getSexo())));
+                .andExpect(jsonPath("$[1].name", is("Aktsuki")))
+                .andExpect(jsonPath("$[1].age",  is(22)))
+                .andExpect(jsonPath("$[1].email", is("teste@email")))
+                .andExpect(jsonPath("$[1].phone", is("teste-phone")))
+                .andExpect(jsonPath("$[1].sexo", is("masculino")));
 
 
         verify(listClientAppService).findAll();
@@ -153,17 +149,15 @@ class ClientControllerV1Test {
 
         when(listPageClientService.findPage(pageable)).thenReturn(clientPage);
 
-        Client clientBuild = createClient().build();
-
         mockMvc.perform(get(URL_CLIENT + "/page/?page=0&size=2").accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].id", is(1)))
-                .andExpect(jsonPath("$.content[0].name", is(clientBuild.getName())))
-                .andExpect(jsonPath("$.content[0].age", is(clientBuild.getAge())))
-                .andExpect(jsonPath("$.content[0].email", is(clientBuild.getEmail())))
-                .andExpect(jsonPath("$.content[0].phone", is(clientBuild.getPhone())))
-                .andExpect(jsonPath("$.content[0].sexo", is(clientBuild.getSexo())));
+                .andExpect(jsonPath("$.content[0].id",   is(1)))
+                .andExpect(jsonPath("$.content[0].name", is("Aktsuki")))
+                .andExpect(jsonPath("$.content[0].age",  is(22)))
+                .andExpect(jsonPath("$.content[0].email",is("teste@email")))
+                .andExpect(jsonPath("$.content[0].phone",is("teste-phone")))
+                .andExpect(jsonPath("$.content[0].sexo", is("masculino")));
 
         verify(listPageClientService).findPage(pageable);
     }

@@ -45,11 +45,12 @@ class SaveClientServiceTest {
         Client result = captorClient.getValue();
 
         assertAll("Client",
-                () -> assertThat(result.getName(), is(client.getName())),
-                () -> assertThat(result.getAge(), is(client.getAge())),
-                () -> assertThat(result.getEmail(), is(client.getEmail())),
-                () -> assertThat(result.getPhone(), is(client.getPhone())),
-                () -> assertThat(result.getSexo(), is(client.getSexo()))
-        );
+                ()-> assertThat(result.getName(), is("Aktsuki")),
+                () -> assertThat(result.getAge(), is(22)),
+                () -> assertThat(result.getEmail(), is("teste@email")),
+                () -> assertThat(result.getPhone(), is("teste-phone")),
+                () -> assertThat(result.getSexo(), is("masculino"))
+
+                );
     }
 }

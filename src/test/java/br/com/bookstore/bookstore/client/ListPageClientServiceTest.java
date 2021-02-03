@@ -54,18 +54,18 @@ class ListPageClientServiceTest {
                 ()-> assertThat(result.getTotalElements(), is(2L)),
                 ()-> assertThat(result.getTotalPages(), is(1)),
                 ()-> assertThat(result.getSize(), is(2)),
-                ()-> assertThat(result.getContent().get(0).getName(), is(client.getName())),
-                () -> assertThat(result.getContent().get(0).getAge(), is(client.getAge())),
-                () -> assertThat(result.getContent().get(0).getEmail(), is(client.getEmail())),
-                () -> assertThat(result.getContent().get(0).getPhone(), is(client.getPhone())),
-                () -> assertThat(result.getContent().get(0).getSexo(), is(client.getSexo())),
+                ()-> assertThat(result.getContent().get(0).getName(), is("Aktsuki")),
+                () -> assertThat(result.getContent().get(0).getAge(), is(22)),
+                () -> assertThat(result.getContent().get(0).getEmail(), is("teste@email")),
+                () -> assertThat(result.getContent().get(0).getPhone(), is("teste-phone")),
+                () -> assertThat(result.getContent().get(0).getSexo(), is("masculino")),
 
 
-                ()-> assertThat(result.getContent().get(1).getName(), is(client.getName())),
-                () -> assertThat(result.getContent().get(1).getAge(), is(client.getAge())),
-                () -> assertThat(result.getContent().get(1).getEmail(), is(client.getEmail())),
-                () -> assertThat(result.getContent().get(1).getPhone(), is(client.getPhone())),
-                () -> assertThat(result.getContent().get(1).getSexo(), is(client.getSexo()))
+                ()-> assertThat(result.getContent().get(1).getName(), is("Aktsuki")),
+                () -> assertThat(result.getContent().get(1).getAge(), is(22)),
+                () -> assertThat(result.getContent().get(1).getEmail(), is("teste@email")),
+                () -> assertThat(result.getContent().get(1).getPhone(), is("teste-phone")),
+                () -> assertThat(result.getContent().get(1).getSexo(), is("masculino"))
         );
     }
 }
