@@ -7,6 +7,7 @@ import br.com.bookstore.bookstore.CategoryOfBook.services.ListPageCategoryOfBook
 import br.com.bookstore.bookstore.CategoryOfBook.services.SaveCategoryOfBookService;
 import br.com.bookstore.bookstore.CategoryOfBook.services.UpdateCategoryOfBookService;
 import br.com.bookstore.bookstore.CategoryOfBook.v1.CategoryOfBookControllerV1;
+import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -35,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("Validates the functionality of the controller responsible of category of book")
 class CategoryOfBookControllerV1Test {
 
-    private final String URL_CLIENT = "/v1/api/book/category";
+    private final String URL_CATEGORYOFBOOK = "/v1/api/book/category";
 
     @Autowired
     private MockMvc mockMvc;
@@ -69,11 +70,24 @@ class CategoryOfBookControllerV1Test {
 
         CategoryOfBook categoryOfBookBuilder = createCategoryOfBook().build();
 
-        mockMvc.perform(get(URL_CLIENT + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(URL_CATEGORYOFBOOK + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is(categoryOfBookBuilder.getName())));
+
+        verify(getCategoryOfBookService).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("findById throws CategoryOfBookNotFoundException when category of book is not found")
+    void findByIdCategoryOfBookThrowCategoryOfBookNotFoundExceptionWhenCategoryOfBookNotFound() throws Exception {
+
+        when(getCategoryOfBookService.findById(anyLong())).thenThrow( new CategoryOfBookNotFoundException());
+
+        mockMvc.perform(get(URL_CATEGORYOFBOOK + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
 
         verify(getCategoryOfBookService).findById(anyLong());
     }
