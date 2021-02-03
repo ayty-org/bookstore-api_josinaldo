@@ -37,6 +37,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -175,6 +176,17 @@ class CategoryOfBookControllerV1Test {
                 .andExpect(status().isNoContent());
 
         verify(updateCategoryOfBookService).update(any(CategoryOfBook.class), eq(1L));
+    }
+
+    @Test
+    @DisplayName("delete remove category of book when successful")
+    void deleteRemoveCategoryOfBookWhenSuccessful() throws Exception{
+        mockMvc.perform(delete(URL_CATEGORYOFBOOK + "/{id}" , 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(deleteCategoryOfBookService).delete(1L);
     }
 
     public static String readJson(String file) throws Exception {
