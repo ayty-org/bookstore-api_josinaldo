@@ -25,6 +25,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -151,5 +153,10 @@ class CategoryOfBookControllerV1Test {
         ;
 
         verify(listPageCategoryOfBooksService).findPage(pageable);
+    }
+
+    public static String readJson(String file) throws Exception {
+        byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/dataJson/" + file).toAbsolutePath());
+        return new String(bytes);
     }
 }
