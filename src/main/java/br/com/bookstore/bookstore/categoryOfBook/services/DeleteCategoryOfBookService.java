@@ -1,4 +1,4 @@
-package br.com.bookstore.bookstore.CategoryOfBook.services;
+package br.com.bookstore.bookstore.categoryOfBook.services;
 
 @FunctionalInterface
 public interface DeleteCategoryOfBookService {

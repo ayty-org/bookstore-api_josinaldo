@@ -1,7 +1,7 @@
-package br.com.bookstore.bookstore.CategoryOfBook.services;
+package br.com.bookstore.bookstore.categoryOfBook.services;
 
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBookRepository;
+import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
+import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

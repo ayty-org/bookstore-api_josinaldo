@@ -1,12 +1,12 @@
-package br.com.bookstore.bookstore.CategoryOfBook;
+package br.com.bookstore.bookstore.categoryOfBook;
 
-import br.com.bookstore.bookstore.CategoryOfBook.services.DeleteCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.GetCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.ListCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.ListPageCategoryOfBooksService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.SaveCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.UpdateCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.v1.CategoryOfBookControllerV1;
+import br.com.bookstore.bookstore.categoryOfBook.services.DeleteCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.GetCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.ListCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.ListPageCategoryOfBooksService;
+import br.com.bookstore.bookstore.categoryOfBook.services.SaveCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.UpdateCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.v1.CategoryOfBookControllerV1;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
@@ -27,10 +27,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 
-import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -79,13 +78,11 @@ class CategoryOfBookControllerV1Test {
 
         when(getCategoryOfBookService.findById(anyLong())).thenReturn(createCategoryOfBook().build());
 
-        CategoryOfBook categoryOfBookBuilder = createCategoryOfBook().build();
-
         mockMvc.perform(get(URL_CATEGORYOFBOOK + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is(categoryOfBookBuilder.getName())));
+                .andExpect(jsonPath("$.name", is("Romance")));
 
         verify(getCategoryOfBookService).findById(anyLong());
     }
@@ -114,20 +111,18 @@ class CategoryOfBookControllerV1Test {
            createCategoryOfBook().id(4L).build()
         ));
 
-        CategoryOfBook categoryOfBook = createCategoryOfBook().build();
-
         mockMvc.perform(get(URL_CATEGORYOFBOOK).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*]", hasSize(4)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[0].name", is("Romance")))
                 .andExpect(jsonPath("$[1].id", is(2)))
-                .andExpect(jsonPath("$[1].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[1].name", is("Romance")))
                 .andExpect(jsonPath("$[2].id", is(3)))
-                .andExpect(jsonPath("$[2].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[2].name", is("Romance")))
                 .andExpect(jsonPath("$[3].id", is(4)))
-                .andExpect(jsonPath("$[3].name", is(categoryOfBook.getName()))
+                .andExpect(jsonPath("$[3].name", is("Romance"))
                 );
 
         verify(listCategoryOfBookService).findAll();
@@ -143,13 +138,12 @@ class CategoryOfBookControllerV1Test {
 
         when(listPageCategoryOfBooksService.findPage(pageable)).thenReturn(categoryOfBooksPage);
 
-        CategoryOfBook categoryOfBookBuild = createCategoryOfBook().build();
 
         mockMvc.perform(get(URL_CATEGORYOFBOOK + "/page/?page=0&size=2", 1L).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id", is(1)))
-                .andExpect(jsonPath("$.content[0].name", is(categoryOfBookBuild.getName())))
+                .andExpect(jsonPath("$.content[0].name", is("Romance")))
         ;
 
         verify(listPageCategoryOfBooksService).findPage(pageable);

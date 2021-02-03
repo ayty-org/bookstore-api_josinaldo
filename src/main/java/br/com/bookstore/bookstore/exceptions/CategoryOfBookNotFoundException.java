@@ -1,6 +1,5 @@
 package br.com.bookstore.bookstore.exceptions;
 
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

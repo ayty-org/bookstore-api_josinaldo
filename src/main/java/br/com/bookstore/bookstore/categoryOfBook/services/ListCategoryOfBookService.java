@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.CategoryOfBook.services;
+package br.com.bookstore.bookstore.categoryOfBook.services;
 
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
+import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
 
 import java.util.List;
 

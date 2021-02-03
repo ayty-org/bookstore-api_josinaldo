@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.CategoryOfBook;
+package br.com.bookstore.bookstore.categoryOfBook;
 
-import br.com.bookstore.bookstore.CategoryOfBook.services.DeleteCategoryOfBookServiceImpl;
+import br.com.bookstore.bookstore.categoryOfBook.services.DeleteCategoryOfBookServiceImpl;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,9 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
-import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

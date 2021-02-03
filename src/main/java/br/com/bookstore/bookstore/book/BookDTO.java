@@ -1,6 +1,6 @@
 package br.com.bookstore.bookstore.book;
 
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
+import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Getter

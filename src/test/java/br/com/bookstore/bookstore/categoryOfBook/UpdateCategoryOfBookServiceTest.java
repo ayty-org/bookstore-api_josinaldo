@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.CategoryOfBook;
+package br.com.bookstore.bookstore.categoryOfBook;
 
-import br.com.bookstore.bookstore.CategoryOfBook.services.UpdateCategoryOfBookServiceImpl;
+import br.com.bookstore.bookstore.categoryOfBook.services.UpdateCategoryOfBookServiceImpl;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -54,7 +54,7 @@ class UpdateCategoryOfBookServiceTest {
 
         CategoryOfBook result = categoryOfBookArgumentCaptor.getValue();
 
-        assertAll("Client",
+        assertAll("CategoryOfBook",
                 () -> assertThat(result.getName(), is(categoryOfBookUpdated.getName()))
         );
     }
