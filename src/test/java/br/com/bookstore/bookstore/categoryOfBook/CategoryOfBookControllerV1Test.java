@@ -32,10 +32,12 @@ import java.util.Collections;
 import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -147,6 +149,18 @@ class CategoryOfBookControllerV1Test {
         ;
 
         verify(listPageCategoryOfBooksService).findPage(pageable);
+    }
+
+    @Test
+    @DisplayName("save returns category of book when successful")
+    void saveReturnsCategoryOfBookWhenSuccessful() throws Exception{
+        mockMvc.perform(post(URL_CATEGORYOFBOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(readJson("categoryOfBookDTO.json")))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        verify(saveCategoryOfBookService).insert(any(CategoryOfBook.class));
     }
 
     public static String readJson(String file) throws Exception {
