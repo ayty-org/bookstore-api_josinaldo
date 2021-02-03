@@ -17,11 +17,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -124,5 +129,27 @@ class CategoryOfBookControllerV1Test {
                 );
 
         verify(listCategoryOfBookService).findAll();
+    }
+
+    @Test
+    @DisplayName("listAll returns list of category of books inside page object when successful")
+    void listAllReturnsListOfCategoryOfBookInsidePageObject_WhenSuccessful() throws Exception{
+
+        Page<CategoryOfBook> categoryOfBooksPage = new PageImpl<>(Collections.singletonList(createCategoryOfBook().build()));
+
+        Pageable pageable = PageRequest.of(0,2);
+
+        when(listPageCategoryOfBooksService.findPage(pageable)).thenReturn(categoryOfBooksPage);
+
+        CategoryOfBook categoryOfBookBuild = createCategoryOfBook().build();
+
+        mockMvc.perform(get(URL_CATEGORYOFBOOK + "/page/?page=0&size=2", 1L).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id", is(1)))
+                .andExpect(jsonPath("$.content[0].name", is(categoryOfBookBuild.getName())))
+        ;
+
+        verify(listPageCategoryOfBooksService).findPage(pageable);
     }
 }

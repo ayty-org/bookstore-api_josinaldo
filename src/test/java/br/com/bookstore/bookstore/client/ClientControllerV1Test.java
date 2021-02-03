@@ -147,7 +147,7 @@ class ClientControllerV1Test {
     @DisplayName("listAll returns list of client inside page object when successful")
     void listAllReturnsListOfClientInsidePageObject_WhenSuccessful() throws Exception{
 
-        Page<Client> clientPage = new PageImpl<>(Collections.singletonList(createClient().build()));
+        Page<Client> clientPage = new PageImpl<>(Collections.singletonList(createClient().id(1L).build()));
 
         Pageable pageable = PageRequest.of(0,2);
 
