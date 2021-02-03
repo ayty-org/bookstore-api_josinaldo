@@ -54,7 +54,7 @@ class UpdateCategoryOfBookServiceTest {
 
         CategoryOfBook result = categoryOfBookArgumentCaptor.getValue();
 
-        assertAll("Client",
+        assertAll("CategoryOfBook",
                 () -> assertThat(result.getName(), is(categoryOfBookUpdated.getName()))
         );
     }

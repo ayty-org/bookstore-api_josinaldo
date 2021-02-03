@@ -46,7 +46,7 @@ class SaveCategoryOfBookServiceTest {
         CategoryOfBook result = captorCategoryOfBook.getValue();
 
         assertAll("categoryOfBook",
-                () -> assertThat(result.getName(), is(categoryOfBook.getName()))
+                () -> assertThat(result.getName(), is("Romance"))
         );
     }
 }

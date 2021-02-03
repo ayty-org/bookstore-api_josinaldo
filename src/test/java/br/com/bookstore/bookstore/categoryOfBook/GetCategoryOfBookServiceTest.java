@@ -47,7 +47,7 @@ class GetCategoryOfBookServiceTest {
 
         //verification
         assertAll("categoryOfBook",
-                () -> assertThat(result.getName(), is(categoryOfBook.getName()))
+                () -> assertThat(result.getName(), is("Romance"))
         );
     }
 

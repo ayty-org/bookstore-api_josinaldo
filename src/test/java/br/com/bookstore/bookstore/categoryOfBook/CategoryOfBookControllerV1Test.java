@@ -78,13 +78,11 @@ class CategoryOfBookControllerV1Test {
 
         when(getCategoryOfBookService.findById(anyLong())).thenReturn(createCategoryOfBook().build());
 
-        CategoryOfBook categoryOfBookBuilder = createCategoryOfBook().build();
-
         mockMvc.perform(get(URL_CATEGORYOFBOOK + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is(categoryOfBookBuilder.getName())));
+                .andExpect(jsonPath("$.name", is("Romance")));
 
         verify(getCategoryOfBookService).findById(anyLong());
     }
@@ -113,20 +111,18 @@ class CategoryOfBookControllerV1Test {
            createCategoryOfBook().id(4L).build()
         ));
 
-        CategoryOfBook categoryOfBook = createCategoryOfBook().build();
-
         mockMvc.perform(get(URL_CATEGORYOFBOOK).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*]", hasSize(4)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[0].name", is("Romance")))
                 .andExpect(jsonPath("$[1].id", is(2)))
-                .andExpect(jsonPath("$[1].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[1].name", is("Romance")))
                 .andExpect(jsonPath("$[2].id", is(3)))
-                .andExpect(jsonPath("$[2].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[2].name", is("Romance")))
                 .andExpect(jsonPath("$[3].id", is(4)))
-                .andExpect(jsonPath("$[3].name", is(categoryOfBook.getName()))
+                .andExpect(jsonPath("$[3].name", is("Romance"))
                 );
 
         verify(listCategoryOfBookService).findAll();
@@ -142,13 +138,12 @@ class CategoryOfBookControllerV1Test {
 
         when(listPageCategoryOfBooksService.findPage(pageable)).thenReturn(categoryOfBooksPage);
 
-        CategoryOfBook categoryOfBookBuild = createCategoryOfBook().build();
 
         mockMvc.perform(get(URL_CATEGORYOFBOOK + "/page/?page=0&size=2", 1L).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id", is(1)))
-                .andExpect(jsonPath("$.content[0].name", is(categoryOfBookBuild.getName())))
+                .andExpect(jsonPath("$.content[0].name", is("Romance")))
         ;
 
         verify(listPageCategoryOfBooksService).findPage(pageable);
