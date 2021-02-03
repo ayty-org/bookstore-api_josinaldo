@@ -32,10 +32,15 @@ import java.util.Collections;
 import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -147,6 +152,41 @@ class CategoryOfBookControllerV1Test {
         ;
 
         verify(listPageCategoryOfBooksService).findPage(pageable);
+    }
+
+    @Test
+    @DisplayName("save returns category of book when successful")
+    void saveReturnsCategoryOfBookWhenSuccessful() throws Exception{
+        mockMvc.perform(post(URL_CATEGORYOFBOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(readJson("categoryOfBookDTO.json")))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        verify(saveCategoryOfBookService).insert(any(CategoryOfBook.class));
+    }
+
+    @Test
+    @DisplayName("update category of book when successful")
+    void updateReturnsCategoryOfBookUpdateWhenSuccessful() throws Exception{
+        mockMvc.perform(put(URL_CATEGORYOFBOOK + "/{id}" , 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(readJson("categoryOfBookUpdate.json")))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(updateCategoryOfBookService).update(any(CategoryOfBook.class), eq(1L));
+    }
+
+    @Test
+    @DisplayName("delete remove category of book when successful")
+    void deleteRemoveCategoryOfBookWhenSuccessful() throws Exception{
+        mockMvc.perform(delete(URL_CATEGORYOFBOOK + "/{id}" , 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(deleteCategoryOfBookService).delete(1L);
     }
 
     public static String readJson(String file) throws Exception {

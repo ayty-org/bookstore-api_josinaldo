@@ -16,6 +16,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 ;
 
@@ -49,7 +50,7 @@ public class Book implements Serializable {
 
     @OneToMany
     @PrimaryKeyJoinColumn
-    private CategoryOfBook categorys;
+    private List<CategoryOfBook> categorys;
 
     public static Book to(BookDTO dto) {
         return Book
