@@ -9,6 +9,7 @@ import br.com.bookstore.bookstore.CategoryOfBook.services.UpdateCategoryOfBookSe
 import br.com.bookstore.bookstore.CategoryOfBook.v1.CategoryOfBookControllerV1;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+
 import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -63,7 +67,7 @@ class CategoryOfBookControllerV1Test {
     private UpdateCategoryOfBookService updateCategoryOfBookService;
 
     @Test
-    @DisplayName("findById returns category of book when succesful")
+    @DisplayName("findById returns category of book when successful")
     void findByIdReturnCategoryOfBookWhenSuccessful() throws Exception {
 
         when(getCategoryOfBookService.findById(anyLong())).thenReturn(createCategoryOfBook().build());
@@ -90,5 +94,35 @@ class CategoryOfBookControllerV1Test {
                 .andExpect(status().isNotFound());
 
         verify(getCategoryOfBookService).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("listAll returns list of category of book when successful")
+    void listAllReturnsListOfCategoryOfBookWhenSuccessfull() throws Exception {
+
+        when(listCategoryOfBookService.findAll()).thenReturn(Lists.newArrayList(
+           createCategoryOfBook().id(1L).build(),
+           createCategoryOfBook().id(2L).build(),
+           createCategoryOfBook().id(3L).build(),
+           createCategoryOfBook().id(4L).build()
+        ));
+
+        CategoryOfBook categoryOfBook = createCategoryOfBook().build();
+
+        mockMvc.perform(get(URL_CATEGORYOFBOOK).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*]", hasSize(4)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[2].id", is(3)))
+                .andExpect(jsonPath("$[2].name", is(categoryOfBook.getName())))
+                .andExpect(jsonPath("$[3].id", is(4)))
+                .andExpect(jsonPath("$[3].name", is(categoryOfBook.getName()))
+                );
+
+        verify(listCategoryOfBookService).findAll();
     }
 }
