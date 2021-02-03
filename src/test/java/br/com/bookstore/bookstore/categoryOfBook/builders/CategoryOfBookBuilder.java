@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.CategoryOfBook.builders;
+package br.com.bookstore.bookstore.categoryOfBook.builders;
 
-import br.com.bookstore.bookstore.CategoryOfBook.CategoryOfBook;
+import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
 
 public class CategoryOfBookBuilder {
 

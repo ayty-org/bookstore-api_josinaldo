@@ -1,12 +1,12 @@
-package br.com.bookstore.bookstore.CategoryOfBook;
+package br.com.bookstore.bookstore.categoryOfBook;
 
-import br.com.bookstore.bookstore.CategoryOfBook.services.DeleteCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.GetCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.ListCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.ListPageCategoryOfBooksService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.SaveCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.services.UpdateCategoryOfBookService;
-import br.com.bookstore.bookstore.CategoryOfBook.v1.CategoryOfBookControllerV1;
+import br.com.bookstore.bookstore.categoryOfBook.services.DeleteCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.GetCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.ListCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.ListPageCategoryOfBooksService;
+import br.com.bookstore.bookstore.categoryOfBook.services.SaveCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.services.UpdateCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryOfBook.v1.CategoryOfBookControllerV1;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
@@ -27,10 +27,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 
-import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;

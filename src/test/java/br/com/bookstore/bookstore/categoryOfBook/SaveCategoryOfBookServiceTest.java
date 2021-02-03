@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.CategoryOfBook;
+package br.com.bookstore.bookstore.categoryOfBook;
 
-import br.com.bookstore.bookstore.CategoryOfBook.services.SaveCategoryOfBookServiceImpl;
+import br.com.bookstore.bookstore.categoryOfBook.services.SaveCategoryOfBookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -10,7 +10,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -45,7 +45,7 @@ class SaveCategoryOfBookServiceTest {
 
         CategoryOfBook result = captorCategoryOfBook.getValue();
 
-        assertAll("CategoryOfBook",
+        assertAll("categoryOfBook",
                 () -> assertThat(result.getName(), is(categoryOfBook.getName()))
         );
     }

@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.CategoryOfBook;
+package br.com.bookstore.bookstore.categoryOfBook;
 
-import br.com.bookstore.bookstore.CategoryOfBook.services.ListPageCategoryOfBooksServiceImpl;
+import br.com.bookstore.bookstore.categoryOfBook.services.ListPageCategoryOfBooksServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Collections;
 
-import static br.com.bookstore.bookstore.CategoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,7 +49,7 @@ class ListPageCategoryOfBooksServiceTest {
 
         CategoryOfBook categoryOfBook = createCategoryOfBook().build();
         //verification
-        assertAll("CategoryOfBook",
+        assertAll("categoryOfBook",
                 ()-> assertThat(result.getNumber(), is(0)),
                 ()-> assertThat(result.getTotalElements(), is(2L)),
                 ()-> assertThat(result.getTotalPages(), is(1)),
