@@ -49,7 +49,7 @@ public class BookDTO implements Serializable {
     private int quantityAvailable;
 
     @NotNull
-    private List<CategoryOfBook> categorys;
+    private CategoryOfBook categorys;
 
     public static BookDTO from(Book entity) {
         return BookDTO
