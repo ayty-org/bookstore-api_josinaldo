@@ -3,7 +3,9 @@ package br.com.bookstore.bookstore.book.services;
 import br.com.bookstore.bookstore.book.Book;
 import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
 
+import java.util.List;
+
 @FunctionalInterface
-public interface GetBookCategoryService {
-    Book findByCategory(CategoryOfBook category);
+public interface ListBookCategoryService {
+    List<Book> findAllBookByCategory(CategoryOfBook category);
 }

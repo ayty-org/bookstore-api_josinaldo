@@ -3,17 +3,23 @@ package br.com.bookstore.bookstore.book.services;
 import br.com.bookstore.bookstore.book.Book;
 import br.com.bookstore.bookstore.book.BookRepository;
 import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
-import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
+import br.com.bookstore.bookstore.exceptions.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
-public class GetBookCategoryServiceImpl implements GetBookCategoryService{
+public class ListBookCategoryServiceImpl implements ListBookCategoryService {
 
     private final BookRepository bookRepository;
     @Override
-    public Book findByCategory(CategoryOfBook category) {
-        return bookRepository.findByCategory(category.getName()).orElseThrow(CategoryOfBookNotFoundException::new);
+    public List<Book> findAllBookByCategory(CategoryOfBook category) {
+        if(bookRepository.existsByCategory(category.getName())){
+            return bookRepository.findAll();
+        }
+
+        throw new BookNotFoundException();
     }
 }
