@@ -6,6 +6,6 @@ import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
 import java.util.List;
 
 @FunctionalInterface
-public interface ListBookCategoryService {
+public interface ListBookByCategoryService {
     List<Book> findAllBookByCategory(CategoryOfBook category);
 }
