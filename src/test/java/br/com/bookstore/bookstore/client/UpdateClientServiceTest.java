@@ -18,7 +18,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,7 +53,7 @@ class UpdateClientServiceTest {
         Optional<Client> clientOptional  = Optional.of(client);
         when(clientRepositoryMock.findById(anyLong())).thenReturn(clientOptional);
 
-        updateClientService.update(putClientRequest, 1L);
+        updateClientService.update(ClientDTO.from(putClientRequest), 1L);
 
         ArgumentCaptor<Client> clientArgumentCaptor = ArgumentCaptor.forClass(Client.class);
         verify(clientRepositoryMock).save(clientArgumentCaptor.capture());
@@ -70,6 +73,8 @@ class UpdateClientServiceTest {
     @DisplayName("update throws ClientNotFoundException when client is not found")
     void updateThrowClientNotFoundExceptionWhenClientNotFound() {
         when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
-        assertThrows(ClientNotFoundException.class, ()-> this.updateClientService.update(Client.builder().build(), 1L));
+        assertThrows(ClientNotFoundException.class,()-> this.updateClientService.update(ClientDTO.builder().build(), 1L));
+
+        verify(clientRepositoryMock, times(0)).save(any());
     }
 }

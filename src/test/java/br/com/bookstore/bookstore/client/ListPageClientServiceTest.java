@@ -19,6 +19,7 @@ import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createCli
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -60,12 +61,13 @@ class ListPageClientServiceTest {
                 () -> assertThat(result.getContent().get(0).getPhone(), is("teste-phone")),
                 () -> assertThat(result.getContent().get(0).getSexo(), is("masculino")),
 
-
                 ()-> assertThat(result.getContent().get(1).getName(), is("Aktsuki")),
                 () -> assertThat(result.getContent().get(1).getAge(), is(22)),
                 () -> assertThat(result.getContent().get(1).getEmail(), is("teste@email")),
                 () -> assertThat(result.getContent().get(1).getPhone(), is("teste-phone")),
                 () -> assertThat(result.getContent().get(1).getSexo(), is("masculino"))
         );
+
+        verify(listPageClientService).findPage(pageable);
     }
 }

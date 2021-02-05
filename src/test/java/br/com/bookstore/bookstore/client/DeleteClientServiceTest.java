@@ -29,7 +29,6 @@ class DeleteClientServiceTest {
 
     private DeleteClientServiceImpl deleteClientService;
 
-
     @BeforeEach
     void setUp() {
         this.deleteClientService = new DeleteClientServiceImpl(clientRepositoryMock);
@@ -38,9 +37,11 @@ class DeleteClientServiceTest {
     @Test
     @DisplayName("delete remove clients when successful")
     void deleteRemoveClientWhenSuccessful() {
+
         when(clientRepositoryMock.existsById(anyLong())).thenReturn(true);
         deleteClientService.delete(1L);
         verify(clientRepositoryMock).existsById(anyLong());
+        verify(clientRepositoryMock).deleteById(anyLong());
     }
     @Test
     @DisplayName("delete throws ClientNotFoundException when client is not found")

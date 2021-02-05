@@ -1,6 +1,5 @@
 package br.com.bookstore.bookstore.categoryOfBook.services;
 
-
 import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
 import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBookRepository;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;

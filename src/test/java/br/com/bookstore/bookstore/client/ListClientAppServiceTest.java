@@ -36,7 +36,7 @@ class ListClientAppServiceTest {
 
     @Test
     @DisplayName("listAll returns list of client when successful")
-    void listAllReturnsListOfClientsWhenSuccessfull() {
+    void listAllReturnsListOfClientsWhenSuccessful() {
 
         Client client = createClient().build();
         when(clientRepository.findAll()).thenReturn(

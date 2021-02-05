@@ -60,7 +60,7 @@ public class ClientControllerV1 {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @PutMapping(value = "/{id}") //replace client by id
     public void update(@Valid @RequestBody ClientDTO clientDTO, @PathVariable Long id ) {
-        updateClientService.update(Client.to(clientDTO), id);
+        updateClientService.update(clientDTO, id);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
