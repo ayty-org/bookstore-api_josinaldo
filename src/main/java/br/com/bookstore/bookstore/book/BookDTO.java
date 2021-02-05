@@ -9,13 +9,13 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.ISBN;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -44,6 +44,7 @@ public class BookDTO implements Serializable {
     private LocalDate yearOfPublication;
 
     @NotEmpty
+    @Min(1)
     private double sellPrice;
 
     @NotEmpty

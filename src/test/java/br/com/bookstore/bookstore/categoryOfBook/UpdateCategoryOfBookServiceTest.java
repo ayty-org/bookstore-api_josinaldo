@@ -18,7 +18,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -65,5 +67,7 @@ class UpdateCategoryOfBookServiceTest {
         when(categoryOfBookRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(CategoryOfBookNotFoundException.class,
                 ()-> this.updateCategoryOfBookService.update(CategoryOfBook.builder().build(), 1L));
+
+        verify(categoryOfBookRepositoryMock, times(0)).save(any());
     }
 }

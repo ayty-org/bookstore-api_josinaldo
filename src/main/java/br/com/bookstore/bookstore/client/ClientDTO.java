@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -35,6 +36,7 @@ public class ClientDTO implements Serializable {
     private String phone;
 
     @NotEmpty(message = "The client email cannot be empty")
+    @Email
     private String email;
 
     @NotNull(message = "The client sexo cannot be null")

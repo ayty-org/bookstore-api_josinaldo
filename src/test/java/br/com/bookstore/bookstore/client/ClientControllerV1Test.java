@@ -224,7 +224,7 @@ class ClientControllerV1Test {
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        verify(updateClientService).update(any(Client.class), eq(1L));
+        verify(updateClientService).update(any(ClientDTO.class), eq(1L));
     }
 
     @Test

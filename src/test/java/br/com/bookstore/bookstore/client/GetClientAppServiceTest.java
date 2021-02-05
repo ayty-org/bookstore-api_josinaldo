@@ -22,7 +22,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
 @DisplayName("Validates the functionality of the services responsible for searching for a client by id ")
@@ -63,7 +62,7 @@ class GetClientAppServiceTest {
     @DisplayName("findById throws ClientNotFoundException when client is not found")
     void findByIdClientThrowClientNotFoundExceptionWhenClientNotFound() {
 
-        when(clientRepositoryMock.findById(anyLong())).thenThrow(new ClientNotFoundException());
+        when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
 
         assertThrows(ClientNotFoundException.class, () -> getClientAppservice.findById(1l));
         verify(clientRepositoryMock, times(1)).findById(anyLong());
