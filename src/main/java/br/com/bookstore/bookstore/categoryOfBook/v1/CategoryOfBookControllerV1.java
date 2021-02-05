@@ -9,6 +9,7 @@ import br.com.bookstore.bookstore.categoryOfBook.services.ListPageCategoryOfBook
 import br.com.bookstore.bookstore.categoryOfBook.services.SaveCategoryOfBookService;
 import br.com.bookstore.bookstore.categoryOfBook.services.UpdateCategoryOfBookService;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -48,7 +49,7 @@ public class CategoryOfBookControllerV1 {
     }
 
     @GetMapping(path = {"/page"}) //list all category of book inside object page
-    public Page<CategoryOfBookDTO> findPage(Pageable pageable) {
+    public Page<CategoryOfBookDTO> findPage(@ParameterObject Pageable pageable) {
         return CategoryOfBookDTO.fromPage(listPageCategoryOfBooksService.findPage(pageable));
     }
 

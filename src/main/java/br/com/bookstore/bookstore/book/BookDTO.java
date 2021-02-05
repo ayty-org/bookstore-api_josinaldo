@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.ISBN;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
@@ -35,7 +36,7 @@ public class BookDTO implements Serializable {
     @NotEmpty
     private String autor;
 
-    @NotEmpty
+    @ISBN
     private String isbn;
 
     @NotNull
