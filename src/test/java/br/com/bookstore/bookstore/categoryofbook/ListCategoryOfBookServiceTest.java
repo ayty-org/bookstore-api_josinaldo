@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.categoryOfBook;
+package br.com.bookstore.bookstore.categoryofbook;
 
-import br.com.bookstore.bookstore.categoryOfBook.services.ListCategoryOfBookServiceImpl;
+import br.com.bookstore.bookstore.categoryofbook.services.ListCategoryOfBookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryofbook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,7 +45,7 @@ class ListCategoryOfBookServiceTest {
         List<CategoryOfBook> result = this.listCategoryOfBookService.findAll();
 
         //verification
-        assertAll("categoryOfBook",
+        assertAll("categoryofbook",
                 () -> assertThat(result.size(), is(1)),
                 () -> assertThat(result.get(0).getName(), is("Ação"))
         );

@@ -1,4 +1,4 @@
-package br.com.bookstore.bookstore.categoryOfBook;
+package br.com.bookstore.bookstore.categoryofbook;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

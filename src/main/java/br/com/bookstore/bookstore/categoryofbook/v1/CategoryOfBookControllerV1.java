@@ -1,13 +1,13 @@
-package br.com.bookstore.bookstore.categoryOfBook.v1;
+package br.com.bookstore.bookstore.categoryofbook.v1;
 
-import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
-import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBookDTO;
-import br.com.bookstore.bookstore.categoryOfBook.services.DeleteCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.GetCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.ListCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.ListPageCategoryOfBooksService;
-import br.com.bookstore.bookstore.categoryOfBook.services.SaveCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.UpdateCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBook;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBookDTO;
+import br.com.bookstore.bookstore.categoryofbook.services.DeleteCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.GetCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.ListCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.ListPageCategoryOfBooksService;
+import br.com.bookstore.bookstore.categoryofbook.services.SaveCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.UpdateCategoryOfBookService;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;

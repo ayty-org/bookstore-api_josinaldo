@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.categoryOfBook;
+package br.com.bookstore.bookstore.categoryofbook;
 
-import br.com.bookstore.bookstore.categoryOfBook.services.DeleteCategoryOfBookServiceImpl;
+import br.com.bookstore.bookstore.categoryofbook.services.DeleteCategoryOfBookServiceImpl;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

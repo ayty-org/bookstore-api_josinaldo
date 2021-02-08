@@ -1,12 +1,12 @@
-package br.com.bookstore.bookstore.categoryOfBook;
+package br.com.bookstore.bookstore.categoryofbook;
 
-import br.com.bookstore.bookstore.categoryOfBook.services.DeleteCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.GetCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.ListCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.ListPageCategoryOfBooksService;
-import br.com.bookstore.bookstore.categoryOfBook.services.SaveCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.services.UpdateCategoryOfBookService;
-import br.com.bookstore.bookstore.categoryOfBook.v1.CategoryOfBookControllerV1;
+import br.com.bookstore.bookstore.categoryofbook.services.DeleteCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.GetCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.ListCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.ListPageCategoryOfBooksService;
+import br.com.bookstore.bookstore.categoryofbook.services.SaveCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.services.UpdateCategoryOfBookService;
+import br.com.bookstore.bookstore.categoryofbook.v1.CategoryOfBookControllerV1;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
@@ -29,7 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 
-import static br.com.bookstore.bookstore.categoryOfBook.builders.CategoryOfBookBuilder.createCategoryOfBook;
+import static br.com.bookstore.bookstore.categoryofbook.builders.CategoryOfBookBuilder.createCategoryOfBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;

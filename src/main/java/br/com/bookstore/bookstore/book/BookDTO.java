@@ -1,6 +1,6 @@
 package br.com.bookstore.bookstore.book;
 
-import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBook;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBook;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package br.com.bookstore.bookstore.categoryOfBook.services;
+package br.com.bookstore.bookstore.categoryofbook.services;
 
-import br.com.bookstore.bookstore.categoryOfBook.CategoryOfBookRepository;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBookRepository;
 import br.com.bookstore.bookstore.exceptions.CategoryOfBookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
