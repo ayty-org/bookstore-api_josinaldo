@@ -48,7 +48,7 @@ public class ClientControllerV1 {
         return ClientDTO.fromAll(listClientAppService.findAll());
     }
 
-    @GetMapping(path = {"/page"})
+    @GetMapping(path = {"/"})
     public Page<ClientDTO> findPage(@ParameterObject Pageable pageable){ return ClientDTO.fromPage(listPageClientService.findPage(pageable));}
 
     @ResponseStatus(code = HttpStatus.CREATED)

@@ -29,7 +29,7 @@ public class ClientDTO implements Serializable {
     private String name;
 
     @NotNull(message = "The client age cannot be null")
-    @Min(value = 1)
+    @Min(value = 2)
     private Integer age;
 
     @NotEmpty(message = "The client phone cannot be empty")

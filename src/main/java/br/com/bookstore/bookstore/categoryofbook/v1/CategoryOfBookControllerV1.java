@@ -48,7 +48,7 @@ public class CategoryOfBookControllerV1 {
         return CategoryOfBookDTO.fromAll(listCategoryOfBookService.findAll());
     }
 
-    @GetMapping(path = {"/page"}) //list all category of book inside object page
+    @GetMapping(path = {"/"}) //list all category of book inside object page
     public Page<CategoryOfBookDTO> findPage(@ParameterObject Pageable pageable) {
         return CategoryOfBookDTO.fromPage(listPageCategoryOfBooksService.findPage(pageable));
     }
