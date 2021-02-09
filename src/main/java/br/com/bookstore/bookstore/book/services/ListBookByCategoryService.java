@@ -6,5 +6,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface ListBookByCategoryService {
-    List<Book> findAllBooksByIsbn(String isbn);
+    List<Book> findAllBooksByCategoryName(String name);
 }
