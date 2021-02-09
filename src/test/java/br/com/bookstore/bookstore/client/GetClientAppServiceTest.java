@@ -53,7 +53,7 @@ class GetClientAppServiceTest {
                 () -> assertThat(result.getAge(), is(22)),
                 () -> assertThat(result.getEmail(),is("teste@email")),
                 () -> assertThat(result.getPhone(),is("teste-phone")),
-                () -> assertThat(result.getSexo(), is("masculino"))
+                () -> assertThat(result.getSexo(), is(Sex.MASCULINO))
         );
 
     }

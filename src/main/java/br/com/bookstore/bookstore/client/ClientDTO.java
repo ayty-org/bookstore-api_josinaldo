@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -29,7 +31,7 @@ public class ClientDTO implements Serializable {
     private String name;
 
     @NotNull(message = "The client age cannot be null")
-    @Min(value = 1)
+    @Min(value = 2)
     private Integer age;
 
     @NotEmpty(message = "The client phone cannot be empty")
@@ -40,7 +42,8 @@ public class ClientDTO implements Serializable {
     private String email;
 
     @NotNull(message = "The client sexo cannot be null")
-    private String sexo;
+    @Enumerated(EnumType.STRING)
+    private Sex sexo;
 
     public static ClientDTO from(Client entity) {
         return ClientDTO

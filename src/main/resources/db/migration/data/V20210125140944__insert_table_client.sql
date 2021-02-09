@@ -9,5 +9,5 @@ INSERT INTO tb_client(
      20,
      '3232058222',
      'josinaldo@gmail.com',
-     'masculino'
+     'MASCULINO'
 )

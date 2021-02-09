@@ -1,6 +1,7 @@
 package br.com.bookstore.bookstore.client.builders;
 
 import br.com.bookstore.bookstore.client.Client;
+import br.com.bookstore.bookstore.client.Sex;
 
 public class ClientBuilder {
 
@@ -12,6 +13,6 @@ public class ClientBuilder {
                 .age(22)
                 .email("teste@email")
                 .phone("teste-phone")
-                .sexo("masculino");
+                .sexo(Sex.MASCULINO);
     }
 }
