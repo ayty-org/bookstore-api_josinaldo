@@ -6,8 +6,6 @@ import br.com.bookstore.bookstore.exceptions.BookAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Service
 public class SaveBookServiceImpl implements SaveBookService {
@@ -16,8 +14,7 @@ public class SaveBookServiceImpl implements SaveBookService {
 
     @Override
     public void insert(Book book) {
-        Optional<Book> isbnInDB = bookRepository.findByIsbn(book.getIsbn());
-        if(isbnInDB.isPresent()) {
+        if(bookRepository.existsByIsbn(book.getIsbn())) {
             throw new BookAlreadyExistException();
         }
 
