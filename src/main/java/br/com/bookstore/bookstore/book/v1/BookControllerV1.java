@@ -38,4 +38,9 @@ public class BookControllerV1 {
     public List<BookDTO> findAll(){
         return BookDTO.fromAll(listBookService.findAll());
     }
+
+    @GetMapping(path = "/{categoryname}")
+    public List<BookDTO> findAllBooksByCategoryName(@PathVariable String categoryname){
+        return BookDTO.fromAll(listBookByCategoryService.findAllBooksByCategoryName(categoryname));
+    }
 }
