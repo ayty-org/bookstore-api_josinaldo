@@ -5,6 +5,6 @@ import br.com.bookstore.bookstore.book.Book;
 import java.util.List;
 
 @FunctionalInterface
-public interface ListBookByIsbnService {
+public interface ListBookByCategoryService {
     List<Book> findAllBooksByIsbn(String isbn);
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class ListBookByIsbnServiceImpl implements ListBookByIsbnService {
+public class ListBookByCategoryServiceImpl implements ListBookByCategoryService {
 
     private final BookRepository bookRepository;
 
