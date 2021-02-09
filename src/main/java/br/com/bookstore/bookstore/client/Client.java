@@ -35,7 +35,7 @@ public class Client implements Serializable {
 
     private String email;
 
-    private String sexo;
+    private Sex sexo;
 
     public static Client to(ClientDTO dto) {
          return Client

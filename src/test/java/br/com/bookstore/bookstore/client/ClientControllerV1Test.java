@@ -91,7 +91,7 @@ class ClientControllerV1Test {
                 .andExpect(jsonPath("$.age", is(22)))
                 .andExpect(jsonPath("$.email", is("teste@email")))
                 .andExpect(jsonPath("$.phone", is("teste-phone")))
-                .andExpect(jsonPath("$.sexo", is("masculino")));
+                .andExpect(jsonPath("$.sexo", is("MASCULINO")));
 
         verify(getClientAppService).findById(anyLong());
     }
@@ -127,13 +127,13 @@ class ClientControllerV1Test {
                 .andExpect(jsonPath("$[0].age", is(22)))
                 .andExpect(jsonPath("$[0].email",is("teste@email")))
                 .andExpect(jsonPath("$[0].phone",  is("teste-phone")))
-                .andExpect(jsonPath("$[0].sexo", is("masculino")))
+                .andExpect(jsonPath("$[0].sexo", is("MASCULINO")))
                 .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].name", is("Aktsuki")))
                 .andExpect(jsonPath("$[1].age",  is(22)))
                 .andExpect(jsonPath("$[1].email", is("teste@email")))
                 .andExpect(jsonPath("$[1].phone", is("teste-phone")))
-                .andExpect(jsonPath("$[1].sexo", is("masculino")));
+                .andExpect(jsonPath("$[1].sexo", is("MASCULINO")));
 
 
         verify(listClientAppService).findAll();
@@ -149,7 +149,7 @@ class ClientControllerV1Test {
 
         when(listPageClientService.findPage(pageable)).thenReturn(clientPage);
 
-        mockMvc.perform(get(URL_CLIENT + "/page/?page=0&size=2").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(URL_CLIENT + "/?page=0&size=2").accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id",   is(1)))
@@ -157,7 +157,7 @@ class ClientControllerV1Test {
                 .andExpect(jsonPath("$.content[0].age",  is(22)))
                 .andExpect(jsonPath("$.content[0].email",is("teste@email")))
                 .andExpect(jsonPath("$.content[0].phone",is("teste-phone")))
-                .andExpect(jsonPath("$.content[0].sexo", is("masculino")));
+                .andExpect(jsonPath("$.content[0].sexo", is("MASCULINO")));
 
         verify(listPageClientService).findPage(pageable);
     }
