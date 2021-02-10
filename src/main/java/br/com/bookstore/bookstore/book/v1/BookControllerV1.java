@@ -63,4 +63,8 @@ public class BookControllerV1 {
     public void insert(@Valid @RequestBody BookDTO bookDTO){
         saveBookService.insert(Book.to(bookDTO));
     }
+
+    public void update(@Valid @RequestBody BookDTO bookDTO, @PathVariable Long id){
+        updateBookService.update(bookDTO, id);
+    }
 }
