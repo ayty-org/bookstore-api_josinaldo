@@ -6,56 +6,57 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.ISBN;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(builderClassName = "Builder")
+@Builder
 public class BookDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    @NotEmpty
+    @NotNull
     private String title;
 
     @Size(max = 500)
     private String sinopse;
 
-    @NotEmpty
+    @Size(min = 1)
+    @NotNull
     private String autor;
 
-    @ISBN
+    @Size(min = 17, max = 17, message = "ISBN must contain 17 characters" + "\n Ex.: 978-3-16-148410-0")
+    @NotNull(message = "ISBN cannot be null")
     private String isbn;
 
     @NotNull
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate yearOfPublication;
 
-    @NotEmpty
-    @DecimalMin(value = "1.00", message = "The min value to sell price is {value} .")
+    @NotNull
+    @DecimalMin(value = "0.00", message = "The min value to sell price is {value} .")
     private double sellPrice;
 
-    @NotEmpty
+    @NotNull
     @Min(0)
     private int quantityAvailable;
 
-    @NotNull
-    private List<CategoryOfBook> categorys;
+    private Set<CategoryOfBook> categories = new HashSet<>();
 
     public static BookDTO from(Book entity) {
         return BookDTO
@@ -68,7 +69,7 @@ public class BookDTO implements Serializable {
                 .yearOfPublication(entity.getYearOfPublication())
                 .sellPrice(entity.getSellPrice())
                 .quantityAvailable(entity.getQuantityAvailable())
-                .categorys(entity.getCategorys())
+                .categories(entity.getCategories())
                 .build();
     }
 

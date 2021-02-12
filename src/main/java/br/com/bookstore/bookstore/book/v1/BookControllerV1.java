@@ -40,40 +40,40 @@ public class BookControllerV1 {
     private final DeleteBookService deleteBookService;
     private final UpdateBookService updateBookService;
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}") //list book by id
     public BookDTO find(@PathVariable Long id) {
         return BookDTO.from(getBookService.findById(id));
     }
 
-    @GetMapping
+    @GetMapping//list all book
     public List<BookDTO> findAll(){
         return BookDTO.fromAll(listBookService.findAll());
     }
 
-    @GetMapping(path = "/{categoryname}")
-    public List<BookDTO> findAllBooksByCategoryName(@PathVariable String categoryname){
-        return BookDTO.fromAll(listBookByCategoryService.findAllBooksByCategoryName(categoryname));
+    @GetMapping(path = "category/{categoryName}") //list book by category name
+    public List<BookDTO> findAllBooksByCategoryName(@PathVariable String categoryName){
+        return BookDTO.fromAll(listBookByCategoryService.findAllBooksByCategoryName(categoryName));
     }
 
-    @GetMapping(path = {"/"})
+    @GetMapping(path = {"/"}) //list all book inside object page
     public Page<BookDTO> findPage(@ParameterObject Pageable pageable) {
         return BookDTO.fromPage(listPageBookService.findPage(pageable));
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping //create book
     public void insert(@Valid @RequestBody BookDTO bookDTO){
         saveBookService.insert(Book.to(bookDTO));
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{id}") //replace book by id
     public void update(@Valid @RequestBody BookDTO bookDTO, @PathVariable Long id){
         updateBookService.update(bookDTO, id);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}") //delete book
     public void delete(@PathVariable Long id){
         deleteBookService.delete(id);
     }
