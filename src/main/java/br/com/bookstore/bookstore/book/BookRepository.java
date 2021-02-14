@@ -9,5 +9,5 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     boolean existsByIsbn(String isbn);
 
-    List<Book> findAllByCategoriesName(String name);
+    List<Book> findBookByCategoriesName(String categoryName);
 }

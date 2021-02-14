@@ -15,6 +15,6 @@ public class ListBookByCategoryServiceImpl implements ListBookByCategoryService 
 
     @Override
     public List<Book> findAllBooksByCategoryName(String category) {
-        return bookRepository.findAllByCategoriesName(category);
+        return bookRepository.findBookByCategoriesName(category);
     }
 }
