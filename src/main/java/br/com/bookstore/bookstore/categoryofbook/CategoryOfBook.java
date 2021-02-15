@@ -21,7 +21,8 @@ import java.io.Serializable;
 
 @Builder(builderClassName = "Builder")
 @Entity
-@Table(name = "tb_categoryofbook")public class CategoryOfBook implements Serializable {
+@Table(name = "tb_categoryofbook")
+public class CategoryOfBook implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
