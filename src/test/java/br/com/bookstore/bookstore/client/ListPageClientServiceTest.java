@@ -67,7 +67,5 @@ class ListPageClientServiceTest {
                 () -> assertThat(result.getContent().get(1).getPhone(), is("teste-phone")),
                 () -> assertThat(result.getContent().get(1).getSexo(), is(Sex.MASCULINO))
         );
-
-        verify(listPageClientService).findPage(pageable);
     }
 }

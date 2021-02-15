@@ -19,7 +19,7 @@ public class UpdateBookServiceImpl implements UpdateBookService {
         Book bookSaved = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
 
         bookSaved.setAutor(bookDTO.getAutor());
-        bookSaved.setCategorys(bookDTO.getCategorys());
+        bookSaved.setCategories(bookDTO.getCategories());
         bookSaved.setIsbn(bookDTO.getIsbn());
         bookSaved.setQuantityAvailable(bookDTO.getQuantityAvailable());
         bookSaved.setSellPrice(bookDTO.getSellPrice());

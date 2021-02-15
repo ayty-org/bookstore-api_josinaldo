@@ -7,28 +7,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder(builderClassName = "Builder")
+@Builder
 @Table(name = "tb_book")
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -46,9 +42,11 @@ public class Book implements Serializable {
 
     private int quantityAvailable;
 
-    @OneToMany
-    @PrimaryKeyJoinColumn
-    private List<CategoryOfBook> categorys;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "book_category",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private Set<CategoryOfBook> categories = new HashSet<>();
 
     public static Book to(BookDTO dto) {
         return Book
@@ -61,7 +59,7 @@ public class Book implements Serializable {
                 .yearOfPublication(dto.getYearOfPublication())
                 .sellPrice(dto.getSellPrice())
                 .quantityAvailable(dto.getQuantityAvailable())
-                .categorys(dto.getCategorys())
+                .categories(dto.getCategories())
                 .build();
     }
 
