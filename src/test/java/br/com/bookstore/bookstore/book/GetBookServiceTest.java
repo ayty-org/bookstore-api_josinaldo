@@ -56,7 +56,7 @@ class GetBookServiceTest {
 
         //verification
         assertAll("Book",
-                ()-> assertThat(result.getTitle(), is("O Pequeno Princípe")),
+                ()-> assertThat(result.getTitle(), is("O Pequeno Príncipe")),
                 ()-> assertThat(result.getSinopse(), is("O Pequeno Príncipe representa a espontaneidade.")),
                 ()-> assertThat(result.getIsbn(), is("978-3-16-148410-0")),
                 ()-> assertThat(result.getAutor(), is("Antoine de Saint")),
