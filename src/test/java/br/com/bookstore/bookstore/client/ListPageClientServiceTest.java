@@ -48,8 +48,6 @@ class ListPageClientServiceTest {
 
         Page<Client> result = listPageClientService.findPage(pageable);
 
-        Client client = createClient().build();
-
         assertAll("Client",
                 ()-> assertThat(result.getNumber(), is(0)),
                 ()-> assertThat(result.getTotalElements(), is(2L)),
