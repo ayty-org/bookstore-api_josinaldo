@@ -65,7 +65,6 @@ class GetClientAppServiceTest {
     void findByIdClientThrowClientNotFoundExceptionWhenClientNotFound() {
 
         when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
-
         assertThrows(ClientNotFoundException.class, () -> getClientAppservice.findById(1l));
         verify(clientRepositoryMock, times(1)).findById(anyLong());
     }

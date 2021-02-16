@@ -2,6 +2,7 @@ package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.book.BookRepository;
 import br.com.bookstore.bookstore.book.services.GetBookServiceImpl;
+import br.com.bookstore.bookstore.exceptions.BookNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -17,6 +18,7 @@ import static br.com.bookstore.bookstore.book.builders.BookBuilder.createBook;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -59,5 +61,14 @@ class GetBookServiceTest {
         );
 
         verify(bookRepositoryMock, times(1)).findById(1L);
+    }
+
+    @Test
+    @DisplayName("findById throws BookNotFoundException when book is not found")
+    void findByIdBookThrowBookNotFoundExceptionWhenBookNotFound() {
+
+        when(bookRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(BookNotFoundException.class, ()-> getBookService.findById(1L));
+        verify(bookRepositoryMock, times(1)).findById(anyLong());
     }
 }
