@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class BookDTO implements Serializable {
     @Min(0)
     private int quantityAvailable;
 
-    private Set<CategoryOfBook> categories = new HashSet<>();
+    private Set<CategoryOfBook> categories;
 
     public static BookDTO from(Book entity) {
         return BookDTO

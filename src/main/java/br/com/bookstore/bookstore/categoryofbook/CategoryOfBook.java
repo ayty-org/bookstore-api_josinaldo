@@ -27,7 +27,7 @@ public class CategoryOfBook implements Serializable {
 
     @Id
     @Column(name = "category_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;

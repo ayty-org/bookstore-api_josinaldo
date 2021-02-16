@@ -18,14 +18,14 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Builder(builderClassName = "Builder")
 @Table(name = "tb_book")
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "book_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String title;
@@ -42,10 +42,8 @@ public class Book implements Serializable {
 
     private int quantityAvailable;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "book_category",
-            joinColumns = {@JoinColumn(name = "book_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    @ManyToMany(cascade = CascadeType.DETACH)
+    @PrimaryKeyJoinColumn
     private Set<CategoryOfBook> categories = new HashSet<>();
 
     public static Book to(BookDTO dto) {
@@ -62,5 +60,4 @@ public class Book implements Serializable {
                 .categories(dto.getCategories())
                 .build();
     }
-
 }

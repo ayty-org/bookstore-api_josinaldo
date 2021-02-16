@@ -56,6 +56,8 @@ class GetClientAppServiceTest {
                 () -> assertThat(result.getSexo(), is(Sex.MASCULINO))
         );
 
+        verify(clientRepositoryMock, times(1)).findById(1L);
+
     }
 
     @Test
@@ -63,7 +65,6 @@ class GetClientAppServiceTest {
     void findByIdClientThrowClientNotFoundExceptionWhenClientNotFound() {
 
         when(clientRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
-
         assertThrows(ClientNotFoundException.class, () -> getClientAppservice.findById(1l));
         verify(clientRepositoryMock, times(1)).findById(anyLong());
     }
