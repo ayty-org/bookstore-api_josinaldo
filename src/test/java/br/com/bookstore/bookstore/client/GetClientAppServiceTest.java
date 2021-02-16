@@ -56,6 +56,8 @@ class GetClientAppServiceTest {
                 () -> assertThat(result.getSexo(), is(Sex.MASCULINO))
         );
 
+        verify(clientRepositoryMock, times(1)).findById(1L);
+
     }
 
     @Test
