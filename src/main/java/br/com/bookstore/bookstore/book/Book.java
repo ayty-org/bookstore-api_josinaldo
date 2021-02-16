@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Builder(builderClassName = "Builder")
 @Table(name = "tb_book")
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
