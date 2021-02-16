@@ -1,6 +1,7 @@
 package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.book.services.ListBookByCategoryServiceImpl;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -10,7 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,10 +45,12 @@ class ListBookByCategoryServiceTest {
     @Test
     @DisplayName("listAll returns list of book by categories when successful")
     void listAllReturnsListOfBookWhenSuccessful() {
+        CategoryOfBook categoryOfBookTest = new CategoryOfBook(1L,"Aventura");
+        Set<CategoryOfBook> categoryOfBookSet = new HashSet<>();
+        categoryOfBookSet.add(categoryOfBookTest);
 
-        Book book = createBook().build();
         when(bookRepositoryMock.findBookByCategoriesName(anyString())).thenReturn(
-                Stream.of(createBook().title("Title test").build()).collect(Collectors.toList())
+                Stream.of(createBook().title("Title test").categories(categoryOfBookSet).build()).collect(Collectors.toList())
         );
 
         List<Book> result = this.listBookByCategoryService.findAllBooksByCategoryName("Aventura");
@@ -57,7 +63,9 @@ class ListBookByCategoryServiceTest {
                 ()-> assertThat(result.get(0).getAutor(), is("Antoine de Saint")),
                 ()-> assertThat(result.get(0).getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.get(0).getSellPrice(), is(10.00)),
-                ()-> assertThat(result.get(0).getQuantityAvailable(), is(2))
+                ()-> assertThat(result.get(0).getQuantityAvailable(), is(2)),
+                ()-> assertThat(result.get(0).getCategories(), is(categoryOfBookSet))
+
         );
 
         verify(bookRepositoryMock, times(1)).findBookByCategoriesName(anyString());

@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -43,7 +44,7 @@ public class Book implements Serializable {
 
     @ManyToMany(cascade = CascadeType.DETACH)
     @PrimaryKeyJoinColumn
-    private Set<CategoryOfBook> categories;
+    private Set<CategoryOfBook> categories = new HashSet<>();
 
     public static Book to(BookDTO dto) {
         return Book
