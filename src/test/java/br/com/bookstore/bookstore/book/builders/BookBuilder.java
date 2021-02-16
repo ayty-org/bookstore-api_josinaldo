@@ -10,7 +10,7 @@ import java.util.Set;
 public class BookBuilder {
 
     public static Book.Builder createBook(){
-        CategoryOfBook categoryOfBookTest = new CategoryOfBook(1L,"Geografia");
+        CategoryOfBook categoryOfBookTest = new CategoryOfBook(1L,"Aventura");
         Set<CategoryOfBook> categoryOfBookSet = new HashSet<>();
         categoryOfBookSet.add(categoryOfBookTest);
         return Book.builder()
