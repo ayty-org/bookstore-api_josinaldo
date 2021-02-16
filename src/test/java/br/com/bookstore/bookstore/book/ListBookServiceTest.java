@@ -1,6 +1,6 @@
 package br.com.bookstore.bookstore.book;
 
-import br.com.bookstore.bookstore.book.services.ListBookByCategoryServiceImpl;
+import br.com.bookstore.bookstore.book.services.ListBookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import static br.com.bookstore.bookstore.book.builders.BookBuilder.createBook;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,29 +25,30 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("Service")
-@DisplayName("Validates the functionality of the services responsible for list all book by categories")
-class ListBookByCategoryServiceTest {
+@DisplayName("Validates the functionality of the services responsible for list all book")
+class ListBookServiceTest {
 
     @Mock
     private BookRepository bookRepositoryMock;
 
-    private ListBookByCategoryServiceImpl listBookByCategoryService;
+    private ListBookServiceImpl listBookService;
 
     @BeforeEach
     void setUp() {
-        this.listBookByCategoryService = new ListBookByCategoryServiceImpl(bookRepositoryMock);
+        this.listBookService = new ListBookServiceImpl(bookRepositoryMock);
     }
 
     @Test
-    @DisplayName("listAll returns list of book by categories when successful")
+    @DisplayName("listAll returns list of books when successful")
     void listAllReturnsListOfBookWhenSuccessful() {
 
         Book book = createBook().build();
-        when(bookRepositoryMock.findBookByCategoriesName(anyString())).thenReturn(
+
+        when(bookRepositoryMock.findAll()).thenReturn(
                 Stream.of(createBook().title("Title test").build()).collect(Collectors.toList())
         );
 
-        List<Book> result = this.listBookByCategoryService.findAllBooksByCategoryName("Aventura");
+        List<Book> result = this.listBookService.findAll();
 
         assertAll("Book",
                 () -> assertThat(result.size(), is(1)),
@@ -60,6 +61,6 @@ class ListBookByCategoryServiceTest {
                 ()-> assertThat(result.get(0).getQuantityAvailable(), is(2))
         );
 
-        verify(bookRepositoryMock, times(1)).findBookByCategoriesName(anyString());
+        verify(bookRepositoryMock, times(1)).findAll();
     }
 }

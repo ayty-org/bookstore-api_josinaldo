@@ -17,6 +17,9 @@ import static br.com.bookstore.bookstore.client.builders.ClientBuilder.createCli
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -53,5 +56,7 @@ class ListClientAppServiceTest {
                 () -> assertThat(result.get(0).getPhone(), is(client.getPhone())),
                 () -> assertThat(result.get(0).getSexo(), is(client.getSexo()))
         );
+
+        verify(clientRepository, times(1)).findAll();
     }
 }
