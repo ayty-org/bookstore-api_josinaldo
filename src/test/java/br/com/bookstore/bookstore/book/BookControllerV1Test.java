@@ -8,6 +8,7 @@ import br.com.bookstore.bookstore.book.services.ListPageBookService;
 import br.com.bookstore.bookstore.book.services.SaveBookService;
 import br.com.bookstore.bookstore.book.services.UpdateBookService;
 import br.com.bookstore.bookstore.book.v1.BookControllerV1;
+import br.com.bookstore.bookstore.exceptions.BookNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -86,5 +87,18 @@ class BookControllerV1Test {
                 .andExpect(jsonPath("$.categories.[0].name", is("Aventura")));
 
         verify(getBookService).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("findById throws BookNotFoundException when book is not found")
+    void findByIdBookThrowBookNotFoundExceptionWhenBookNotFound() throws Exception {
+
+        when(getBookService.findById(anyLong())).thenThrow(new BookNotFoundException());
+
+        mockMvc.perform(get(URL_BOOK + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(getBookService).findById(1L);
     }
 }
