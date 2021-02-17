@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static br.com.bookstore.bookstore.book.builders.BookBuilder.createBook;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -74,11 +75,16 @@ class BookControllerV1Test {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is("Aktsuki")))
-                .andExpect(jsonPath("$.age", is(22)))
-                .andExpect(jsonPath("$.email", is("teste@email")))
-                .andExpect(jsonPath("$.phone", is("teste-phone")))
-                .andExpect(jsonPath("$.sexo", is("MASCULINO")));
+                .andExpect(jsonPath("$.title", is("O Pequeno Príncipe")))
+                .andExpect(jsonPath("$.sinopse", is("O Pequeno Príncipe representa a espontaneidade.")))
+                .andExpect(jsonPath("$.isbn", is("978-3-16-148410-0")))
+                .andExpect(jsonPath("$.autor", is("Antoine de Saint")))
+                .andExpect(jsonPath("$.yearOfPublication", is("1943-04-06")))
+                .andExpect(jsonPath("$.sellPrice", is(10.00)))
+                .andExpect(jsonPath("$.quantityAvailable", is(2)))
+                .andExpect(jsonPath("$.categories.[0].id", is(1)))
+                .andExpect(jsonPath("$.categories.[0].name", is("Aventura")));
 
+        verify(getBookService).findById(anyLong());
     }
 }
