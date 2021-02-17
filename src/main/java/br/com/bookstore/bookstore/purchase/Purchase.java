@@ -37,4 +37,18 @@ public class Purchase implements Serializable {
 
     @Column(name = "amount_to_play")
     private double amountToPlay;
+
+    @Column(name = "purchase_status")
+    private Enum<Status> purchaseStatus;
+
+    public static Purchase to(PurchaseDTO dto) {
+        return Purchase
+                .builder()
+                .id(dto.getId())
+                .client(dto.getClient())
+                .purchasedBooks(dto.getPurchasedBooks())
+                .amountToPlay(dto.getAmountToPlay())
+                .purchaseStatus(dto.getPurchaseStatus())
+                .build();
+    }
 }
