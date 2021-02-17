@@ -39,6 +39,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -221,6 +222,90 @@ class BookControllerV1Test {
                 .andExpect(status().isCreated());
 
         verify(saveBookService).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("save throws book when title is null")
+    void saveThrowBadRequestWhenTitleIsNull() throws Exception{
+
+        Book book = createBook().id(1L).title(null).build();
+        mockMvc.perform(post(URL_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(saveBookService, times(0)).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("save throws book when sinopse is null")
+    void saveThrowBadRequestWhenSinopseIsNull() throws Exception{
+
+        Book book = createBook().id(1L).sinopse(null).build();
+        mockMvc.perform(post(URL_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(saveBookService, times(0)).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("save throws book when autor is null")
+    void saveThrowBadRequestWhenAutorIsNull() throws Exception{
+
+        Book book = createBook().id(1L).autor(null).build();
+        mockMvc.perform(post(URL_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(saveBookService, times(0)).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("save throws book when isbn is null")
+    void saveThrowBadRequestWhenIsbnIsNull() throws Exception{
+
+        Book book = createBook().id(1L).isbn(null).build();
+        mockMvc.perform(post(URL_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(saveBookService, times(0)).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("save throws book when sel price is negative")
+    void saveThrowBadRequestWhenSellPriceIsNegative() throws Exception{
+
+        Book book = createBook().id(1L).sellPrice(-1).build();
+        mockMvc.perform(post(URL_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(saveBookService, times(0)).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("save throws book when yearOfPublication is null")
+    void saveThrowBadRequestWhenYearOfPublicationIsNull() throws Exception{
+
+        Book book = createBook().id(1L).yearOfPublication(null).build();
+        mockMvc.perform(post(URL_BOOK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        verify(saveBookService, times(0)).insert(any(Book.class));
     }
 
     @Test
