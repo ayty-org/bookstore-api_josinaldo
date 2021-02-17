@@ -38,10 +38,13 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -218,6 +221,29 @@ class BookControllerV1Test {
                 .andExpect(status().isCreated());
 
         verify(saveBookService).insert(any(Book.class));
+    }
+
+    @Test
+    @DisplayName("update book when successful")
+    void updateReturnsBookUpdateWhenSuccessful() throws Exception{
+        mockMvc.perform(put(URL_BOOK + "/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(readJson("bookUpdate.json")))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(updateBookService).update(any(BookDTO.class), eq(1L));
+    }
+
+    @Test
+    @DisplayName("delete remove books when successful")
+    void deleteRemoveBookWhenSuccessful() throws Exception{
+        mockMvc.perform(delete(URL_BOOK + "/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(deleteBookService).delete(anyLong());
     }
 
     public static String readJson(String file) throws Exception {
