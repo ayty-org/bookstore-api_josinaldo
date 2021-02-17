@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class PurchaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     private Long id;
 
     @NotNull
@@ -35,7 +34,6 @@ public class PurchaseDTO implements Serializable {
     @NotNull
     private double amountToPlay;
 
-    @NotNull
     private Enum<Status> purchaseStatus;
 
     public static PurchaseDTO from(Purchase entity) {

@@ -1,5 +1,6 @@
 package br.com.bookstore.bookstore.purchase.services;
 
+import br.com.bookstore.bookstore.exceptions.PurchaseNotFoundException;
 import br.com.bookstore.bookstore.purchase.Purchase;
 import br.com.bookstore.bookstore.purchase.PurchaseRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,6 @@ public class GetPurchaseServiceImpl implements GetPurchaseService{
 
     @Override
     public Purchase findById(Long id) {
-        return purchaseRepository.findById(id).orElseThrow(Error::new);
+        return purchaseRepository.findById(id).orElseThrow(PurchaseNotFoundException::new);
     }
 }
