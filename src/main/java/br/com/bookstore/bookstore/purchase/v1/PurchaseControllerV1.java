@@ -51,12 +51,12 @@ public class PurchaseControllerV1 {
         return PurchaseDTO.fromAll(listPurchaseService.findAll());
     }
 
-    @GetMapping(path = "/{status}") //list book by category name
+    @GetMapping(path = "/status/{status}") //list purchase by status
     public List<PurchaseDTO> findAllPurchaseByStatus(@PathVariable Status status){
         return PurchaseDTO.fromAll(listPurchaseByStatusService.findAllPurchaseByStatus(status));
     }
 
-    @GetMapping(path = {"/"}) //list all purchase inside object page
+    @GetMapping(path = {"/"})//list all purchase inside object page
     public Page<PurchaseDTO> findPage(@ParameterObject Pageable pageable){
         return PurchaseDTO.fromPage(listPagePurchaseService.findPage(pageable));
     }
@@ -68,14 +68,14 @@ public class PurchaseControllerV1 {
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @PutMapping(value = "/{id}") //replace purchase by id
-    public void update(@Valid @RequestBody Long id) {
+    @PutMapping( "/done/{id}") //replace purchase by id
+    public void update(@PathVariable Long id) {
         updatePurchaseService.update(id);
     }
 
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/{id}") //delete purchase
-    public void delete(@PathVariable Long id) {
+    public void delete(@Valid @PathVariable Long id) {
         deletePurchaseService.delete(id);
     }
 }

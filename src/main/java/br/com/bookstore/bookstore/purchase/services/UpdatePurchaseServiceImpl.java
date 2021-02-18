@@ -1,5 +1,6 @@
 package br.com.bookstore.bookstore.purchase.services;
 
+import br.com.bookstore.bookstore.exceptions.PurchaseNotFoundException;
 import br.com.bookstore.bookstore.purchase.Purchase;
 import br.com.bookstore.bookstore.purchase.PurchaseRepository;
 import br.com.bookstore.bookstore.purchase.Status;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UpdatePurchaseServiceImpl implements UpdatePurchaseService{
 
-    private PurchaseRepository purchaseRepository;
+    private final PurchaseRepository purchaseRepository;
 
     @Override
     public void update(Long id) {
-        Purchase purchaseSaved = purchaseRepository.getOne(id);
+        Purchase purchaseSaved = purchaseRepository.findById(id).orElseThrow(PurchaseNotFoundException::new);
 
         purchaseSaved.setStatus(Status.DONE);
 
