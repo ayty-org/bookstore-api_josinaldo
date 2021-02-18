@@ -2,9 +2,11 @@ package br.com.bookstore.bookstore.purchase.v1;
 
 import br.com.bookstore.bookstore.purchase.Purchase;
 import br.com.bookstore.bookstore.purchase.PurchaseDTO;
+import br.com.bookstore.bookstore.purchase.Status;
 import br.com.bookstore.bookstore.purchase.services.DeletePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.GetPurchaseService;
 import br.com.bookstore.bookstore.purchase.services.ListPagePurchaseService;
+import br.com.bookstore.bookstore.purchase.services.ListPurchaseByStatusService;
 import br.com.bookstore.bookstore.purchase.services.ListPurchaseService;
 import br.com.bookstore.bookstore.purchase.services.SavePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.UpdatePurchaseService;
@@ -34,6 +36,7 @@ public class PurchaseControllerV1 {
     private final GetPurchaseService getPurchaseService;
     private final ListPurchaseService listPurchaseService;
     private final ListPagePurchaseService listPagePurchaseService;
+    private final ListPurchaseByStatusService listPurchaseByStatusService;
     private final SavePurchaseService savePurchaseService;
     private final UpdatePurchaseService updatePurchaseService;
     private final DeletePurchaseService deletePurchaseService;
@@ -46,6 +49,11 @@ public class PurchaseControllerV1 {
     @GetMapping//list all purchase
     public List<PurchaseDTO> findAll() {
         return PurchaseDTO.fromAll(listPurchaseService.findAll());
+    }
+
+    @GetMapping(path = "/{status}") //list book by category name
+    public List<PurchaseDTO> findAllPurchaseByStatus(@PathVariable Status status){
+        return PurchaseDTO.fromAll(listPurchaseByStatusService.findAllPurchaseByStatus(status));
     }
 
     @GetMapping(path = {"/"}) //list all purchase inside object page
