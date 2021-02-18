@@ -34,7 +34,7 @@ public class PurchaseDTO implements Serializable {
     @NotNull
     private double amountToPay;
 
-    private Enum<Status> purchaseStatus;
+    private Enum<Status> status;
 
     public static PurchaseDTO from(Purchase entity) {
         return PurchaseDTO
@@ -43,7 +43,7 @@ public class PurchaseDTO implements Serializable {
                 .client(entity.getClient())
                 .purchasedBooks(entity.getPurchasedBooks())
                 .amountToPay(entity.getAmountToPay())
-                .purchaseStatus(entity.getPurchaseStatus())
+                .status(entity.getStatus())
                 .build();
     }
 

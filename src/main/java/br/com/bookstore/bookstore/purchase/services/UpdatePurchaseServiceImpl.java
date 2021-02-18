@@ -16,7 +16,7 @@ public class UpdatePurchaseServiceImpl implements UpdatePurchaseService{
     public void update(Long id) {
         Purchase purchaseSaved = purchaseRepository.getOne(id);
 
-        purchaseSaved.setPurchaseStatus(Status.DONE);
+        purchaseSaved.setStatus(Status.DONE);
 
         purchaseRepository.save(purchaseSaved);
     }

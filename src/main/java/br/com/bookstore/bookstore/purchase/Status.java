@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum Status {
-    UNIFINISHED, PENDING, DONE;
+    PENDING, DONE;
 }

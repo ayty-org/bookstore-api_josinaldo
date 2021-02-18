@@ -39,7 +39,7 @@ public class Purchase implements Serializable {
     private double amountToPay;
 
     @Column(name = "purchase_status")
-    private Enum<Status> purchaseStatus;
+    private Enum<Status> status;
 
     public static Purchase to(PurchaseDTO dto) {
         return Purchase
@@ -48,7 +48,7 @@ public class Purchase implements Serializable {
                 .client(dto.getClient())
                 .purchasedBooks(dto.getPurchasedBooks())
                 .amountToPay(dto.getAmountToPay())
-                .purchaseStatus(dto.getPurchaseStatus())
+                .status(dto.getPurchaseStatus())
                 .build();
     }
 }
