@@ -48,7 +48,7 @@ public class Purchase implements Serializable {
                 .client(dto.getClient())
                 .purchasedBooks(dto.getPurchasedBooks())
                 .amountToPay(dto.getAmountToPay())
-                .status(dto.getPurchaseStatus())
+                .status(dto.getStatus())
                 .build();
     }
 }

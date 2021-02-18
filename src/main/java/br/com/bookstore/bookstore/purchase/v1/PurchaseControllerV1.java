@@ -3,9 +3,13 @@ package br.com.bookstore.bookstore.purchase.v1;
 import br.com.bookstore.bookstore.purchase.Purchase;
 import br.com.bookstore.bookstore.purchase.PurchaseDTO;
 import br.com.bookstore.bookstore.purchase.services.GetPurchaseService;
+import br.com.bookstore.bookstore.purchase.services.ListPagePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.ListPurchaseService;
 import br.com.bookstore.bookstore.purchase.services.SavePurchaseService;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +29,7 @@ public class PurchaseControllerV1 {
 
     private final GetPurchaseService getPurchaseService;
     private final ListPurchaseService listPurchaseService;
+    private final ListPagePurchaseService listPagePurchaseService;
     private final SavePurchaseService savePurchaseService;
 
     @GetMapping(value = "/{id}")//list book by id
@@ -35,6 +40,10 @@ public class PurchaseControllerV1 {
     @GetMapping//list all book
     public List<PurchaseDTO> findAll() {
         return PurchaseDTO.fromAll(listPurchaseService.findAll());
+    }
+
+    public Page<PurchaseDTO> findPage(@ParameterObject Pageable pageable){
+        return PurchaseDTO.fromPage(listPagePurchaseService.findPage(pageable));
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)
