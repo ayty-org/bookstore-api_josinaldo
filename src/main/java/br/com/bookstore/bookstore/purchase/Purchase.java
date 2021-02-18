@@ -35,11 +35,11 @@ public class Purchase implements Serializable {
     @PrimaryKeyJoinColumn(name = "purchased_books")
     private Set<Book> purchasedBooks;
 
-    @Column(name = "amount_to_play")
-    private double amountToPlay;
+    @Column(name = "amount_to_pay")
+    private double amountToPay;
 
     @Column(name = "purchase_status")
-    private Enum<Status> purchaseStatus;
+    private Enum<Status> status;
 
     public static Purchase to(PurchaseDTO dto) {
         return Purchase
@@ -47,8 +47,8 @@ public class Purchase implements Serializable {
                 .id(dto.getId())
                 .client(dto.getClient())
                 .purchasedBooks(dto.getPurchasedBooks())
-                .amountToPlay(dto.getAmountToPlay())
-                .purchaseStatus(dto.getPurchaseStatus())
+                .amountToPay(dto.getAmountToPay())
+                .status(dto.getStatus())
                 .build();
     }
 }
