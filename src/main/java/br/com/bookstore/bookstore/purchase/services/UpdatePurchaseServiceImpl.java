@@ -8,19 +8,15 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class SavePurchaseServiceImpl implements SavePurchaseService{
+public class UpdatePurchaseServiceImpl implements UpdatePurchaseService{
 
-    private final PurchaseRepository purchaseRepository;
+    private PurchaseRepository purchaseRepository;
 
     @Override
-    public void insert(Purchase purchase) {
-        Purchase purchaseSaved = new Purchase(
-                null,
-                purchase.getClient(),
-                purchase.getPurchasedBooks(),
-                purchase.getAmountToPay(),
-                Status.PENDING
-                );
+    public void update(Long id) {
+        Purchase purchaseSaved = purchaseRepository.getOne(id);
+
+        purchaseSaved.setPurchaseStatus(Status.DONE);
 
         purchaseRepository.save(purchaseSaved);
     }
