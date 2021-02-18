@@ -2,7 +2,6 @@ package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.book.services.DeleteBookServiceImpl;
 import br.com.bookstore.bookstore.exceptions.BookNotFoundException;
-import javafx.beans.binding.When;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
