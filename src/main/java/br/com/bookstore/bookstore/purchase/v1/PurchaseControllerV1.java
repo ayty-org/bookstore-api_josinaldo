@@ -1,6 +1,5 @@
 package br.com.bookstore.bookstore.purchase.v1;
 
-import br.com.bookstore.bookstore.book.BookDTO;
 import br.com.bookstore.bookstore.purchase.Purchase;
 import br.com.bookstore.bookstore.purchase.PurchaseDTO;
 import br.com.bookstore.bookstore.purchase.services.GetPurchaseService;
@@ -28,17 +27,18 @@ public class PurchaseControllerV1 {
     private final ListPurchaseService listPurchaseService;
     private final SavePurchaseService savePurchaseService;
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")//list book by id
     public PurchaseDTO find(@PathVariable Long id) {
         return PurchaseDTO.from(getPurchaseService.findById(id));
     }
 
+    @GetMapping//list all book
     public List<PurchaseDTO> findAll() {
         return PurchaseDTO.fromAll(listPurchaseService.findAll());
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping//create purchase
     public void insert(@Valid @RequestBody PurchaseDTO purchaseDTO){
         savePurchaseService.insert(Purchase.to(purchaseDTO));
     }
