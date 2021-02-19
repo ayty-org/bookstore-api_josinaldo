@@ -2,6 +2,7 @@ package br.com.bookstore.bookstore.purchase;
 
 import br.com.bookstore.bookstore.book.Book;
 import br.com.bookstore.bookstore.client.Client;
+import br.com.bookstore.bookstore.exceptions.PurchaseNotFoundException;
 import br.com.bookstore.bookstore.purchase.services.GetPurchaseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,6 +19,8 @@ import static br.com.bookstore.bookstore.purchase.builders.PurchaseBuilder.creat
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -58,5 +60,14 @@ class GetPurchaseServiceTest {
         );
 
         verify(purchaseRepositoryMock, times(3)).findById(1L);
+    }
+
+    @Test
+    @DisplayName("findById throws PurchaseNotFoundException when purchase is not found")
+    void findByIdPurchaseThrowPurchaseNotFoundExceptionWhenPurchaseNotFound() {
+
+        when(purchaseRepositoryMock.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(PurchaseNotFoundException.class, ()-> getPurchaseService.findById(1L));
+        verify(purchaseRepositoryMock, times(1)).findById(anyLong());
     }
 }
