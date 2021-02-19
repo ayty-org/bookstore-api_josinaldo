@@ -30,7 +30,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/v1/api/purchase")
+@RequestMapping(value = "v1/api/purchase")
 public class PurchaseControllerV1 {
 
     private final GetPurchaseService getPurchaseService;

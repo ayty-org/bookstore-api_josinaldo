@@ -28,7 +28,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/v1/api/client")
+@RequestMapping(value = "v1/api/client")
 public class ClientControllerV1 {
 
     private final GetClientAppService getClientAppService;
