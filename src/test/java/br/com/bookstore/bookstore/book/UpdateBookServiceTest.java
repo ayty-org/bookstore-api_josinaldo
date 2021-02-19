@@ -2,6 +2,7 @@ package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.book.services.UpdateBookService;
 import br.com.bookstore.bookstore.book.services.UpdateBookServiceImpl;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBook;
 import br.com.bookstore.bookstore.exceptions.BookNotFoundException;
 import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 import static br.com.bookstore.bookstore.book.builders.BookBuilder.createBook;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -50,6 +52,7 @@ class UpdateBookServiceTest {
                 .title("New Title")
                 .quantityAvailable(10)
                 .build();
+        Set<CategoryOfBook> bookCategory = putBookRequest.getCategories();
 
         Optional<Book> bookOptional = Optional.of(createBook().build());
         when(bookRepositoryMock.findById(anyLong())).thenReturn(bookOptional);
@@ -69,7 +72,8 @@ class UpdateBookServiceTest {
                 ()-> assertThat(result.getAutor(), is("Antoine de Saint")),
                 ()-> assertThat(result.getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.getSellPrice(), is(10.00)),
-                ()-> assertThat(result.getQuantityAvailable(), is(10))
+                ()-> assertThat(result.getQuantityAvailable(), is(10)),
+                ()-> assertThat(result.getCategories(), is(bookCategory))
         );
     }
 

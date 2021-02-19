@@ -28,7 +28,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/v1/api/book/category")
+@RequestMapping(value = "v1/api/book/category")
 public class CategoryOfBookControllerV1 {
 
     private final GetCategoryOfBookService getCategoryOfBookService;

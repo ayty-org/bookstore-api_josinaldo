@@ -1,6 +1,7 @@
 package br.com.bookstore.bookstore.book;
 
 import br.com.bookstore.bookstore.book.services.SaveBookServiceImpl;
+import br.com.bookstore.bookstore.categoryofbook.CategoryOfBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -11,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import static br.com.bookstore.bookstore.book.builders.BookBuilder.createBook;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -39,7 +42,7 @@ class SaveBookServiceTest {
     void saveReturnsBookWhenSuccessful() {
 
         Book book = createBook().build();
-
+        Set<CategoryOfBook> bookCategory = book.getCategories();
         saveBookService.insert(book);
 
         ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
@@ -55,7 +58,8 @@ class SaveBookServiceTest {
                 ()-> assertThat(result.getAutor(), is("Antoine de Saint")),
                 ()-> assertThat(result.getYearOfPublication(), is(LocalDate.of(1943, 4, 6))),
                 ()-> assertThat(result.getSellPrice(), is(10.00)),
-                ()-> assertThat(result.getQuantityAvailable(), is(2))
+                ()-> assertThat(result.getQuantityAvailable(), is(2)),
+                ()-> assertThat(result.getCategories(), is(bookCategory))
         );
     }
 }

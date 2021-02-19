@@ -43,7 +43,7 @@ class GetBookServiceTest {
     }
 
     @Test
-    @DisplayName("findById returns book when succesful")
+    @DisplayName("findById returns book when successful")
     void findByIdReturnBookWhenSuccessful(){
 
         Book book = createBook().build(); //create a build to book

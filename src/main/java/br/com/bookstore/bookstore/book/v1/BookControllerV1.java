@@ -29,7 +29,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/v1/api/book")
+@RequestMapping(value = "v1/api/book")
 public class BookControllerV1 {
 
     private final GetBookService getBookService;

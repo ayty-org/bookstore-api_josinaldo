@@ -17,10 +17,12 @@ public class ListPurchaseByStatusServiceImpl implements ListPurchaseByStatusServ
 
     @Override
     public List<Purchase> findAllPurchaseByStatus(Status status) {
-        if(purchaseRepository.findPurchaseByStatus(status).isEmpty()){
+        List<Purchase> purchase = purchaseRepository.findPurchaseByStatus(status);
+
+        if(purchase.isEmpty()){
             throw new CategoryOfBookNotFoundException();
         }
 
-        return purchaseRepository.findPurchaseByStatus(status);
+        return purchase;
     }
 }
