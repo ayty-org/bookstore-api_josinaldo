@@ -10,6 +10,7 @@ import br.com.bookstore.bookstore.purchase.services.SavePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.UpdatePurchaseService;
 import br.com.bookstore.bookstore.purchase.v1.PurchaseControllerV1;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static br.com.bookstore.bookstore.purchase.builders.PurchaseBuilder.createPurchase;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -87,7 +89,7 @@ class PurchaseControllerV1Test {
 
     @Test
     @DisplayName("findById throws PurchaseNotFoundException when purchase is not found")
-    void findByIdBookThrowPurchaseNotFoundExceptionWhenPurchaseNotFound() throws Exception {
+    void findByIdPurchaseThrowPurchaseNotFoundExceptionWhenPurchaseNotFound() throws Exception {
 
         when(getPurchaseService.findById(anyLong())).thenThrow(new PurchaseNotFoundException());
 
@@ -96,5 +98,32 @@ class PurchaseControllerV1Test {
                 .andExpect(status().isNotFound());
 
         verify(getPurchaseService).findById(1L);
+    }
+
+    @Test
+    @DisplayName("listAll returns list of purchase when successful")
+    void listAllReturnsListOfPurchaseWhenSuccessfull() throws Exception {
+
+        when(listPurchaseService.findAll()).thenReturn(Lists.newArrayList(
+                createPurchase().id(1L).build(),
+                createPurchase().id(2L).build()
+        ));
+
+        mockMvc.perform(get(URL_PURCHASE).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*]", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].client.id", is(1)))
+                .andExpect(jsonPath("$[0].purchasedBooks.[0].id", is(1)))
+                .andExpect(jsonPath("$[0].amountToPay", is(200.00)))
+                .andExpect(jsonPath("$[0].status", is("PENDING")))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].client.id", is(1)))
+                .andExpect(jsonPath("$[1].purchasedBooks.[0].id", is(1)))
+                .andExpect(jsonPath("$[1].amountToPay", is(200.00)))
+                .andExpect(jsonPath("$[1].status", is("PENDING")));
+
+        verify(listPurchaseService).findAll();
     }
 }
