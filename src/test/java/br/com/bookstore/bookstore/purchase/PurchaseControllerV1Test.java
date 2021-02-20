@@ -1,5 +1,6 @@
 package br.com.bookstore.bookstore.purchase;
 
+import br.com.bookstore.bookstore.exceptions.PurchaseNotFoundException;
 import br.com.bookstore.bookstore.purchase.services.DeletePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.GetPurchaseService;
 import br.com.bookstore.bookstore.purchase.services.ListPagePurchaseService;
@@ -82,5 +83,18 @@ class PurchaseControllerV1Test {
                 .andExpect(jsonPath("$.status", is("PENDING")));
 
         verify(getPurchaseService).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("findById throws PurchaseNotFoundException when purchase is not found")
+    void findByIdBookThrowPurchaseNotFoundExceptionWhenPurchaseNotFound() throws Exception {
+
+        when(getPurchaseService.findById(anyLong())).thenThrow(new PurchaseNotFoundException());
+
+        mockMvc.perform(get(URL_PURCHASE + "/{id}", 1L).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(getPurchaseService).findById(1L);
     }
 }
