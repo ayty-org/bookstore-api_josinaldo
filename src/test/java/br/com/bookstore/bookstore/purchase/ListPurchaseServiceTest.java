@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +53,7 @@ class ListPurchaseServiceTest {
 
         Client client = createClient().build();
 
-        List<Purchase> purchaseList = Arrays.asList(createPurchase().client(client).purchasedBooks(books).build());
+        List<Purchase> purchaseList = Collections.singletonList(createPurchase().client(client).purchasedBooks(books).build());
 
         when(purchaseRepositoryMock.findAll()).thenReturn(purchaseList);
 
