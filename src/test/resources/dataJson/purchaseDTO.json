@@ -1,0 +1,5 @@
+{
+  "client": {"id": 1},
+  "purchasedBooks": [{"id": 1}],
+  "amountToPay": 100.00
+}

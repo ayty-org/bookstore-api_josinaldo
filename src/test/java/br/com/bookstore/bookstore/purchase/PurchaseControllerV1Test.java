@@ -1,5 +1,6 @@
 package br.com.bookstore.bookstore.purchase;
 
+import br.com.bookstore.bookstore.book.BookDTO;
 import br.com.bookstore.bookstore.exceptions.PurchaseNotFoundException;
 import br.com.bookstore.bookstore.purchase.services.DeletePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.GetPurchaseService;
@@ -26,16 +27,22 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 
 import static br.com.bookstore.bookstore.purchase.builders.PurchaseBuilder.createPurchase;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -179,6 +186,29 @@ class PurchaseControllerV1Test {
     }
 
     @Test
+    @DisplayName("save returns purchase when successful")
+    void saveReturnsPurchaseWhenSuccessful() throws Exception{
+        mockMvc.perform(post(URL_PURCHASE)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(readJson("purchaseDTO.json")))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        verify(savePurchaseService).insert(any(Purchase.class));
+    }
+
+    @Test
+    @DisplayName("update purchase when successful")
+    void updateReturnsPurchaseUpdateWhenSuccessful() throws Exception{
+        mockMvc.perform(put(URL_PURCHASE + "/done/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(updatePurchaseService).update(eq(1L));
+    }
+
+    @Test
     @DisplayName("delete remove purchase when successful")
     void deleteRemovePurchaseWhenSuccessful() throws Exception{
         mockMvc.perform(delete(URL_PURCHASE + "/{id}", 1L)
@@ -187,5 +217,10 @@ class PurchaseControllerV1Test {
                 .andExpect(status().isNoContent());
 
         verify(deletePurchaseService).delete(anyLong());
+    }
+
+    public static String readJson(String file) throws Exception {
+        byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/dataJson/" + file).toAbsolutePath());
+        return new String(bytes);
     }
 }
