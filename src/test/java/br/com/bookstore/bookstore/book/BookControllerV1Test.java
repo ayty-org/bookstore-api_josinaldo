@@ -30,8 +30,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import static br.com.bookstore.bookstore.book.builders.BookBuilder.createBook;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
