@@ -49,7 +49,7 @@ class ListPagePurchaseServiceTest {
     @DisplayName("listAll returns list of purchase inside page object when successful")
     void listAllReturnsListOfPurchaseInsidePageObjectWhenSuccessful() {
 
-        Pageable pageable = PageRequest.of(0,1);
+        Pageable pageable = PageRequest.of(0,2);
 
         //Object book
         Set<Book> books = new HashSet<>();
@@ -75,6 +75,8 @@ class ListPagePurchaseServiceTest {
                 ()-> assertThat(result.getContent().get(0).getAmountToPay(), is(200.00)),
                 ()-> assertThat(result.getContent().get(0).getStatus(), is(Status.PENDING))
         );
+
+        verify(purchaseRepositoryMock).findAll(pageable);
     }
 
 }

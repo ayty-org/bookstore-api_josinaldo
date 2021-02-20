@@ -18,9 +18,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Collections;
 
 import static br.com.bookstore.bookstore.purchase.builders.PurchaseBuilder.createPurchase;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -125,5 +131,27 @@ class PurchaseControllerV1Test {
                 .andExpect(jsonPath("$[1].status", is("PENDING")));
 
         verify(listPurchaseService).findAll();
+    }
+
+    @Test
+    @DisplayName("listAll returns list of book inside page object when successful")
+    void listAllReturnsListOfPurchaseInsidePageObject_WhenSuccessful() throws Exception{
+
+        Page<Purchase> purchasePage = new PageImpl<>(Collections.singletonList(createPurchase().build()));
+
+        Pageable pageable = PageRequest.of(0,2);
+
+        when(listPagePurchaseService.findPage(pageable)).thenReturn(purchasePage);
+
+        mockMvc.perform(get(URL_PURCHASE + "/?page=0&size=2").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id", is(1)))
+                .andExpect(jsonPath("$.content[0].client.id", is(1)))
+                .andExpect(jsonPath("$.content[0].purchasedBooks.[0].id", is(1)))
+                .andExpect(jsonPath("$.content[0].amountToPay", is(200.00)))
+                .andExpect(jsonPath("$.content[0].status", is("PENDING")));
+
+        verify(listPagePurchaseService).findPage(pageable);
     }
 }
