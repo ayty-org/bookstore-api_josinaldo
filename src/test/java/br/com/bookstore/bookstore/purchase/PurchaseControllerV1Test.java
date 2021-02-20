@@ -134,7 +134,7 @@ class PurchaseControllerV1Test {
     }
 
     @Test
-    @DisplayName("listAll returns list of book inside page object when successful")
+    @DisplayName("listAll returns list of purchase inside page object when successful")
     void listAllReturnsListOfPurchaseInsidePageObject_WhenSuccessful() throws Exception{
 
         Page<Purchase> purchasePage = new PageImpl<>(Collections.singletonList(createPurchase().build()));
@@ -153,5 +153,27 @@ class PurchaseControllerV1Test {
                 .andExpect(jsonPath("$.content[0].status", is("PENDING")));
 
         verify(listPagePurchaseService).findPage(pageable);
+    }
+
+    @Test
+    @DisplayName("listAll returns list of purchase by status when successful")
+    void listAllByStatusReturnsListOfPurchaseWhenSuccessful() throws Exception {
+
+        Purchase purchase = createPurchase().build();
+
+        Status statusPurchase = Status.PENDING;
+
+        when(listPurchaseByStatusService.findAllPurchaseByStatus(statusPurchase)).thenReturn(Collections.singletonList(purchase));
+
+        mockMvc.perform(get(URL_PURCHASE + "/status/{status}", statusPurchase).accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].client.id", is(1)))
+                .andExpect(jsonPath("$[0].purchasedBooks.[0].id", is(1)))
+                .andExpect(jsonPath("$[0].amountToPay", is(200.00)))
+                .andExpect(jsonPath("$[0].status", is("PENDING")));
+
+        verify(listPurchaseByStatusService).findAllPurchaseByStatus(statusPurchase);
     }
 }
