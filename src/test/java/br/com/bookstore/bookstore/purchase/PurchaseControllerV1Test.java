@@ -34,6 +34,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -175,5 +176,16 @@ class PurchaseControllerV1Test {
                 .andExpect(jsonPath("$[0].status", is("PENDING")));
 
         verify(listPurchaseByStatusService).findAllPurchaseByStatus(statusPurchase);
+    }
+
+    @Test
+    @DisplayName("delete remove purchase when successful")
+    void deleteRemovePurchaseWhenSuccessful() throws Exception{
+        mockMvc.perform(delete(URL_PURCHASE + "/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        verify(deletePurchaseService).delete(anyLong());
     }
 }
