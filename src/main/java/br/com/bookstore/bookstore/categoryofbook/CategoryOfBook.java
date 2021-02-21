@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +25,6 @@ public class CategoryOfBook implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

@@ -14,11 +14,11 @@ spring:
     password: root
   flyway:
     baseline-on-migrate: false
-    enabled: false
+    enabled: true
     locations: classpath:/db/migration
 # JPA properties
   jpa:
     show-sql: true
     database: postgresql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
