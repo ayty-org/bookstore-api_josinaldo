@@ -3,13 +3,12 @@ package br.com.bookstore.bookstore.client.v1;
 import br.com.bookstore.bookstore.client.Client;
 import br.com.bookstore.bookstore.client.ClientDTO;
 import br.com.bookstore.bookstore.client.services.DeleteClientService;
-import br.com.bookstore.bookstore.client.services.ListClientAppService;
 import br.com.bookstore.bookstore.client.services.GetClientAppService;
+import br.com.bookstore.bookstore.client.services.ListClientAppService;
 import br.com.bookstore.bookstore.client.services.ListPageClientService;
 import br.com.bookstore.bookstore.client.services.SaveClientService;
 import br.com.bookstore.bookstore.client.services.UpdateClientService;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,7 @@ public class ClientControllerV1 {
     }
 
     @GetMapping(path = {"/"})
-    public Page<ClientDTO> findPage(@ParameterObject Pageable pageable){ return ClientDTO.fromPage(listPageClientService.findPage(pageable));}
+    public Page<ClientDTO> findPage(Pageable pageable){ return ClientDTO.fromPage(listPageClientService.findPage(pageable));}
 
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping //create client
