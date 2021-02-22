@@ -11,7 +11,6 @@ import br.com.bookstore.bookstore.purchase.services.ListPurchaseService;
 import br.com.bookstore.bookstore.purchase.services.SavePurchaseService;
 import br.com.bookstore.bookstore.purchase.services.UpdatePurchaseService;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -57,7 +56,7 @@ public class PurchaseControllerV1 {
     }
 
     @GetMapping(path = {"/"})//list all purchase inside object page
-    public Page<PurchaseDTO> findPage(@ParameterObject Pageable pageable){
+    public Page<PurchaseDTO> findPage(Pageable pageable){
         return PurchaseDTO.fromPage(listPagePurchaseService.findPage(pageable));
     }
 

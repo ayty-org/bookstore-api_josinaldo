@@ -1,0 +1,27 @@
+#informações da api
+openapi: 3.0.1
+info:
+  description:
+    "Esta versão é uma api do sistema de livraria, no qual fornece dados puros nos formatos JSON de clientes, livros, categoria de livros e compras.
+    Ele tenta aderir à arquitetura REST da sequência de consultas que podem ser aplicados para filtrar e selecionar resultados e as estruturas de dados retornadas.\n
+    ATENÇÂO: Esta versão está incomplera, sujeita a alterações."
+  version: "1.0.0"
+  title: "Book-Store: livraria"
+  contact:
+    email: "josinaldo.pontes@phoebustecnologia.com.br"
+  licences:
+    name: "Open Source"
+
+
+tags:
+  - name: "book-controller"
+    description: "All about books in book store"
+  - name: "client-controller"
+    description: "All about client in book store"
+  - name: "categoryofbook-controller"
+    description: "All about category of book in book store"
+  - name: "purchase-controller"
+    description: "All about purchase in book store"
+
+schemes:
+  - "http"

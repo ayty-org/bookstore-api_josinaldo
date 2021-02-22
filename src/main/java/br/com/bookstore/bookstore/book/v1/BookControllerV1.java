@@ -10,7 +10,6 @@ import br.com.bookstore.bookstore.book.services.ListPageBookService;
 import br.com.bookstore.bookstore.book.services.SaveBookService;
 import br.com.bookstore.bookstore.book.services.UpdateBookService;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -56,7 +55,7 @@ public class BookControllerV1 {
     }
 
     @GetMapping(path = {"/"}) //list all book inside object page
-    public Page<BookDTO> findPage(@ParameterObject Pageable pageable) {
+    public Page<BookDTO> findPage(Pageable pageable) {
         return BookDTO.fromPage(listPageBookService.findPage(pageable));
     }
 
